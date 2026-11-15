@@ -21,10 +21,11 @@ def verify_claim(claim, evidence, api_key):
         if verdict not in VERDICTS: verdict = "NEEDS REVIEW"
         if strength not in {"STRONG", "MODERATE", "INSUFFICIENT"}: strength = "INSUFFICIENT"
         if verdict == "NEEDS REVIEW": data["correction"] = ""
-        # A snippet-only result cannot establish a strong finding.
-        if all(x.get("credibility") == "search result only" for x in evidence) and verdict != "NEEDS REVIEW":
+        # Search snippets and unvetted pages cannot establish a conclusive finding.
+        trusted = {"primary document", "official web source", "academic web source"}
+        if not any(x.get("credibility") in trusted for x in evidence) and verdict != "NEEDS REVIEW":
             verdict, strength = "NEEDS REVIEW", "INSUFFICIENT"
-            data["explanation"] = "Only search-result snippets were retrievable; they are insufficient to establish this verdict. " + str(data.get("explanation", ""))
+            data["explanation"] = "No official, academic, or local primary document was retrieved; external material is insufficient to establish this verdict. " + str(data.get("explanation", ""))
             data["correction"] = ""
         return {"verdict": verdict, "strength": strength, "explanation": str(data.get("explanation", "Evidence assessment unavailable.")), "correction": str(data.get("correction", ""))}
     except Exception as exc:

@@ -1,0 +1,10 @@
+{
+  "metadata": {
+    "dataset": "bhashaguard-bilingual-consistency",
+    "split": "dev",
+    "status": "empty-template",
+    "manual_review_required": true,
+    "case_count": 0
+  },
+  "cases": []
+}

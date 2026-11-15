@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "BhashaGuard manually reviewed claim case",
+  "type": "object",
+  "required": ["test_id", "scheme", "language", "input_answer", "expected_claim", "expected_verdict", "source_pdf", "page", "original_page_number", "evidence", "expected_explanation", "difficulty", "category"],
+  "properties": {
+    "test_id": {"type": "string", "minLength": 1},
+    "scheme": {"type": "string", "minLength": 1},
+    "language": {"enum": ["English", "Hindi"]},
+    "input_answer": {"type": "string", "minLength": 1},
+    "expected_claim": {"type": "string", "minLength": 1},
+    "expected_verdict": {"enum": ["ACCEPTED", "BLOCKED", "NEEDS REVIEW"]},
+    "source_pdf": {"type": "string"},
+    "page": {"oneOf": [{"type": "integer", "minimum": 1}, {"type": "null"}]},
+    "original_page_number": {"type": "string"},
+    "additional_sources": {"type": "array", "items": {"type": "object", "required": ["source_pdf", "page", "original_page_number", "evidence"], "properties": {"source_pdf": {"type": "string"}, "page": {"type": "integer", "minimum": 1}, "original_page_number": {"type": "string"}, "evidence": {"type": "string"}}}},
+    "evidence": {"type": "string"},
+    "expected_explanation": {"type": "string", "minLength": 1},
+    "difficulty": {"enum": ["easy", "medium", "hard"]},
+    "category": {"type": "string", "minLength": 1}
+  },
+  "additionalProperties": true
+}

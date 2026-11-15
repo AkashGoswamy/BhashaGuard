@@ -30,25 +30,32 @@ Place PDFs in `data/documents/`; subfolders are scanned too. Use **PDF library â
 
 ## Benchmarks
 
-Place labelled `.json` or `.csv` files in `data/benchmark/`. JSON may be a list of cases or `{ "cases": [...] }`. Each case needs a `label` or `expected_verdict` and a `predicted_verdict` (one of the three exact verdict labels). Optional fields: `language`, `expected_discrepancy`, and `predicted_discrepancy` (boolean-like values). This dashboard calculates metrics from supplied predictions; it does not run the auditor over the dataset automatically.
+The supplied source JSON files are kept unchanged in `data/json/`. The Evaluation tab normalizes them in memory and shows 50 factual cases plus 10 bilingual pairs. The companion file marks all 60 as needing source verification, so they are **provisional candidates**, not verified ground truth. The imported set is split deterministically by scheme/source/page/claim with seed 42; the assignments and dataset versions are recorded in each run. No case is counted in verified evaluation until it is separately reviewed. Empty manual templates and schemas remain in `data/benchmark/`.
 
-Example:
+The Evaluation tab and CLI run the production extraction, retrieval, verification, and comparison functions. Runs are saved under `data/benchmark/results/` with predictions, evidence, timing, reported token usage, API failures, model and dataset versions. Runs are explicit; the CLI defaults to at most five cases to control API usage. Failed and missing predictions count as incorrect in accuracy and remain visible. Retrieval and citation metrics are unavailable for the imported candidates until their gold pages and passages are verified. Do not tune on the held-out split.
 
-```json
-{
-  "cases": [
-    {"claim":"Example claim", "expected_verdict":"ACCEPTED", "predicted_verdict":"ACCEPTED", "language":"English"}
-  ]
-}
+For evaluation without starting Streamlit:
+
+```powershell
+python -m core.benchmark_cli --split dev --kind claims --dataset imported --mode provisional --limit 5
+python -m core.benchmark_cli --split dev --kind bilingual --dataset imported --mode provisional --limit 5
+```
+
+The CLI prompts for the Groq key without echoing it and optionally for a Tavily key. For the held-out evaluation, use `--split final` only after development is complete.
+
+Run the offline evaluation tests with:
+
+```powershell
+python -m unittest discover -s tests -v
 ```
 
 ## Deployment
 
-For Streamlit Community Cloud, deploy this repository with `app.py` as the entry point and `requirements.txt` for dependencies. Hugging Face Spaces can run the same app using its Streamlit SDK template and the same requirements. Enter API keys in the app sidebar after launch. Never commit keys. Hosted deployments cannot read PDFs on your personal computer: include documents in the repository or provide them through an appropriate hosted storage workflow. The `.gitignore` excludes local PDFs and benchmark files by default.
+For Streamlit Community Cloud, deploy this repository with `app.py` as the entry point and `requirements.txt` for dependencies. Hugging Face Spaces can run the same app using its Streamlit SDK template and the same requirements. Enter API keys in the app sidebar after launch. Never commit keys. Hosted deployments cannot read PDFs on your personal computer: include documents in the repository or provide them through an appropriate hosted storage workflow. Benchmark run outputs are ignored by Git; the empty templates and schemas are intended to be versioned.
 
 ## Limits
 
 - Groq and Tavily calls require network access and valid keys. Live webpage text extraction may fail for JavaScript-only or access-restricted pages; such sources are marked as search-result-only and cannot on their own produce a conclusive verdict.
-- PDF retrieval uses lightweight token overlap, not semantic embeddings. The index detects changed PDFs from size and modification time.
+- Local PDF retrieval uses a small BM25-style lexical ranker with exact phrase, number, and language boosts. It does not download or run a separate embedding model. The index detects changed PDFs from size and modification time.
 - LLM claim interpretation can still make mistakes. Treat NEEDS REVIEW as unresolved, and inspect the source passages before relying on a result.
-- No metrics are displayed until labelled benchmark cases with both reference and predicted verdicts are supplied.
+- Provisional candidate metrics are labeled as provisional. This repository currently has zero manually verified benchmark records, so verified accuracy and citation/retrieval scores are unavailable.

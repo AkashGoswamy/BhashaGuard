@@ -1,5 +1,7 @@
 import json
 import re
+import math
+from functools import lru_cache
 from pathlib import Path
 import pymupdf as fitz
 from core.llm import groq_chat, json_from_response
@@ -11,6 +13,25 @@ INDEX = ROOT / "data" / "index" / "pdf_index.json"
 
 def _fingerprint(paths):
     return [(str(p.relative_to(DOCS)), p.stat().st_size, p.stat().st_mtime_ns) for p in paths]
+
+
+def index_status():
+    """Read cache metadata and PDF file stats only; never extracts page text."""
+    DOCS.mkdir(parents=True, exist_ok=True)
+    paths = sorted(DOCS.rglob("*.pdf"))
+    files = _fingerprint(paths)
+    try:
+        cached = json.loads(INDEX.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        cached = None
+    summary = cached.get("summary", {}) if cached else {}
+    stale = bool(paths) and (not cached or cached.get("fingerprints") != files)
+    if not paths:
+        summary = {"documents": 0, "chunks": 0, "scanned": [], "errors": []}
+        stale = False
+    elif not summary:
+        summary = {"documents": len(paths), "chunks": 0, "scanned": [], "errors": []}
+    return {"summary": summary, "stale": stale, "indexed": bool(cached and not stale), "pdf_files": len(paths)}
 
 
 def index_pdfs(force=False):
@@ -47,29 +68,62 @@ def index_pdfs(force=False):
     return summary
 
 
+@lru_cache(maxsize=1)
+def _cached_chunks(mtime_ns, size):
+    try:
+        return json.loads(INDEX.read_text(encoding="utf-8")).get("chunks", [])
+    except (OSError, json.JSONDecodeError, TypeError):
+        return []
+
+
 def _load_chunks():
-    index_pdfs()
-    try: return json.loads(INDEX.read_text(encoding="utf-8")).get("chunks", [])
-    except (OSError, json.JSONDecodeError): return []
+    if not index_status()["indexed"]:
+        return []
+    try:
+        stat = INDEX.stat()
+        return _cached_chunks(stat.st_mtime_ns, stat.st_size)
+    except OSError:
+        return []
 
 
 def _terms(text):
     return set(re.findall(r"[\w\u0900-\u097F]+", text.lower(), flags=re.UNICODE))
 
 
-def retrieve_local(query, language=None, limit=5):
+def _rank_chunks(query, chunks, language=None, limit=5):
     terms = _terms(query)
     if not terms: return []
+    if not chunks: return []
+    tokenized = [_terms(c.get("text", "")) for c in chunks]
+    doc_freq = {term: sum(term in words for words in tokenized) for term in terms}
+    avg_len = sum(len(words) for words in tokenized) / max(1, len(tokenized))
+    numbers = {t for t in terms if any(ch.isdigit() for ch in t)}
     scored = []
-    for chunk in _load_chunks():
-        cterms = _terms(chunk["text"])
-        overlap = len(terms & cterms)
-        if overlap:
-            # Jaccard-like ranking limits long chunks from dominating.
-            score = overlap / (len(terms) ** 0.5 * max(1, len(cterms)) ** 0.25)
-            scored.append((score, chunk))
+    for chunk, words in zip(chunks, tokenized):
+        overlap = terms & words
+        if not overlap:
+            continue
+        length = max(1, len(words))
+        score = 0.0
+        for term in overlap:
+            df = doc_freq.get(term, 0)
+            idf = math.log(1 + (len(chunks) - df + 0.5) / (df + 0.5))
+            frequency = sum(1 for word in re.findall(r"[\w\u0900-\u097F]+", chunk.get("text", "").casefold(), re.UNICODE) if word == term)
+            score += idf * (frequency * 2.2) / (frequency + 1.2 * (0.25 + 0.75 * length / max(1, avg_len)))
+        # Keep exact phrases and numeric facts visible in the ranking.
+        if str(query).casefold().strip() in chunk.get("text", "").casefold():
+            score += 1.0
+        if numbers:
+            score += 0.35 * len(numbers & words)
+        if language and chunk.get("language") == language:
+            score *= 1.08
+        scored.append((score, chunk))
     scored.sort(key=lambda x: x[0], reverse=True)
     return [{"title": item["document"], "document": item["document"], "location": f"page {item['page']}", "page": item["page"], "language": item["language"], "text": item["text"], "credibility": "primary document", "score": round(score, 3)} for score, item in scored[:limit]]
+
+
+def retrieve_local(query, language=None, limit=5):
+    return _rank_chunks(query, _load_chunks(), language, limit)
 
 
 def generate_questions(api_key):

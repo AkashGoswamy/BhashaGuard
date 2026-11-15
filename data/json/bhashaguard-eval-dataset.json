@@ -1,0 +1,1211 @@
+{
+  "dataset_name": "BhashaGuard AI Reliability Audit Evaluation Dataset",
+  "version": "1.0.0",
+  "schema_author": "BhashaGuard Project",
+  "metadata": {
+    "total_benchmark_cases": 50,
+    "total_bilingual_pairs": 10,
+    "verified_cases": 60,
+    "unverified_cases": 0
+  },
+  "verified_benchmark_cases": [
+    {
+      "id": "BG-001",
+      "scheme": "ADIP Scheme",
+      "language": "English",
+      "difficulty": "Standard",
+      "category": "Direct Support",
+      "input_text": "To qualify for assistive devices under the ADIP scheme, an applicant must be an Indian citizen of any age holding a UDID card or enrollment number with at least 40% disability, and have a monthly family income from all sources not exceeding Rs. 30,000.",
+      "atomic_claims": [
+        "Beneficiary must be an Indian citizen of any age.",
+        "Disability certificate must certify at least 40% disability.",
+        "Monthly income from all sources must not exceed Rs. 30,000 per month."
+      ],
+      "expected_verdict": "ACCEPTED",
+      "evidence_quote": "1. An Indian citizen of any age. 2. Holding a UDID card issued by the Ministry or enrollment number of UDID card alongwith Disability Certificate with atleast 40% disability. ... 4. Having monthly income from all sources not exceeding Rs.30,000/- per month.",
+      "source_filename": "ADIP_English (4).pdf",
+      "printed_page": "Page 3 (Para 6.0)",
+      "pdf_page_index": 2,
+      "explanation": "All three atomic claims are verbatim supported by Section 6.0 of the revised English ADIP guidelines.",
+      "corrected_claim": null,
+      "verification_status": "VERIFIED"
+    },
+    {
+      "id": "BG-002",
+      "scheme": "ADIP Scheme",
+      "language": "Hindi",
+      "difficulty": "Standard",
+      "category": "Direct Support",
+      "input_text": "एिडप योजना के तहत 80% और उससे अिधक द ांगता वाले 16 वष या उससे अिधक आयु के ि य को मोटरयु ाइसाइ कल के िलए अिधकतम 50,000 पये क सि सडी दी जाती ह।",
+      "atomic_claims": [
+        "Motorized tricycle assistance requires 80% and above disability.",
+        "Minimum age eligible for motorized tricycle is 16 years.",
+        "Maximum subsidy for motorized tricycle is Rs. 50,000."
+      ],
+      "expected_verdict": "ACCEPTED",
+      "evidence_quote": "80% और उससे अिधक द ांगता वाले द ांग ि मोटरयु ाइसाइ कल और मोटरयु हीलचेयर के िलए सहायता के पा ह गे। अिधकतम सि सडी 50,000/- पये होगी। यह 16 वष और उससे अिधक आयु के ि य को पांच वष म एक बार दान कया जाएगा",
+      "source_filename": "ADIP_Hindi(4).pdf",
+      "printed_page": "Page 4 (Para 8.01 (ग))",
+      "pdf_page_index": 3,
+      "explanation": "The claims regarding benchmark disability threshold (80%+), minimum age (16 years), and maximum financial subsidy limit (Rs. 50,000) match the Hindi ADIP text exactly.",
+      "corrected_claim": null,
+      "verification_status": "VERIFIED"
+    },
+    {
+      "id": "BG-003",
+      "scheme": "ADIP Scheme",
+      "language": "English",
+      "difficulty": "Standard",
+      "category": "Direct Support",
+      "input_text": "For children with pre-lingual hearing loss between 1 to 5 years of age, the ADIP scheme provides a financial ceiling of Rs. 7.00 lakh per unit for Cochlear Implant surgery and rehabilitation.",
+      "atomic_claims": [
+        "Cochlear implant ceiling is Rs. 7.00 lakh per unit for pre-lingual hearing loss children aged 1 to 5 years."
+      ],
+      "expected_verdict": "ACCEPTED",
+      "evidence_quote": "Cochlear Implant and post operative therapy and rehabilitation for children with Hearing Impairment with a ceiling of Rs. 7.00 lakh per unit (to be borne by the Government) in case of children with pre-lingual hearing loss between 1 to 5 years of age",
+      "source_filename": "ADIP_English (4).pdf",
+      "printed_page": "Page 4 (Para 7.0(iv))",
+      "pdf_page_index": 3,
+      "explanation": "The financial support ceiling of Rs. 7.00 lakh for pre-lingual hearing loss in children aged 1 to 5 is explicitly stated in Para 7.0(iv).",
+      "corrected_claim": null,
+      "verification_status": "VERIFIED"
+    },
+    {
+      "id": "BG-004",
+      "scheme": "ADIP Scheme",
+      "language": "English",
+      "difficulty": "Difficult Edge Case",
+      "category": "Direct Contradiction / Distortion",
+      "input_text": "Under the ADIP scheme, a beneficiary can receive 100% financial assistance for assistive devices even if their monthly family income is Rs. 45,000 per month.",
+      "atomic_claims": [
+        "Monthly family income up to Rs. 45,000 qualifies for full cost assistance of aids/appliances."
+      ],
+      "expected_verdict": "BLOCKED",
+      "evidence_quote": "i. Upto Rs. 22,500/- per month - Full cost of aid/appliance; ii. Rs.22,501/- to Rs. 30,000/- per month - 50% of the cost of aid/appliance\" and \"Having monthly income from all sources not exceeding Rs.30,000/- per month.",
+      "source_filename": "ADIP_English (4).pdf",
+      "printed_page": "Page 3-4 (Para 6.0 & 7.01)",
+      "pdf_page_index": 2,
+      "explanation": "Contradicted by the text: income above Rs. 30,000 makes an applicant completely ineligible, and full financial assistance is capped at incomes up to Rs. 22,500 per month.",
+      "corrected_claim": "Official source specification (ADIP_English (4).pdf, Page 3-4 (Para 6.0 & 7.01)): i. Upto Rs. 22,500/- per month - Full cost of aid/appliance; ii. Rs.22,501/- to Rs. 30,000/- per month - 50% of the cost of aid/appliance\" and \"Having monthly income from all sources not exceeding Rs.30,000/- per month.",
+      "verification_status": "VERIFIED"
+    },
+    {
+      "id": "BG-005",
+      "scheme": "ADIP Scheme",
+      "language": "Hindi",
+      "difficulty": "Difficult Edge Case",
+      "category": "Direct Contradiction / Distortion",
+      "input_text": "एिडप योजना म वाक् एवं वण बािधत ि य के िलए फटमट स े पूव आव यक स जकल सुधार हते ु 15,000 पये क सहायता दी जाती ह।",
+      "atomic_claims": [
+        "Essential surgical correction prior to fitment for speech and hearing impaired individuals is Rs. 15,000."
+      ],
+      "expected_verdict": "BLOCKED",
+      "evidence_quote": "1. वाक् और वण बािधत के िलए 1500 पये। 2. दिृ बािधत के िलए 3,000 पये। 3. ऑथ पेिडकली इ पेयड के िलए 15,000 पये।",
+      "source_filename": "ADIP_Hindi(4).pdf",
+      "printed_page": "Page 2 (Para 4.01)",
+      "pdf_page_index": 1,
+      "explanation": "The document specifies Rs. 1,500 for speech & hearing impaired and Rs. 15,000 for orthopedically impaired. Claiming Rs. 15,000 for speech & hearing impaired is factually incorrect.",
+      "corrected_claim": "Official source specification (ADIP_Hindi(4).pdf, Page 2 (Para 4.01)): 1. वाक् और वण बािधत के िलए 1500 पये। 2. दिृ बािधत के िलए 3,000 पये। 3. ऑथ पेिडकली इ पेयड के िलए 15,000 पये।",
+      "verification_status": "VERIFIED"
+    },
+    {
+      "id": "BG-006",
+      "scheme": "ADIP Scheme",
+      "language": "English",
+      "difficulty": "Difficult Edge Case",
+      "category": "Direct Contradiction / Distortion",
+      "input_text": "Repeat financial assistance under the ADIP scheme for adults can be availed every single year for the same purpose.",
+      "atomic_claims": [
+        "Adults can receive repeat assistance every year for the same purpose under ADIP."
+      ],
+      "expected_verdict": "BLOCKED",
+      "evidence_quote": "Not having received assistance during the last 3 years for the same purpose from any source. However, for children below 12 years of age, the minimum time of assistance is one year.",
+      "source_filename": "ADIP_English (4).pdf",
+      "printed_page": "Page 3 (Para 6.0(6))",
+      "pdf_page_index": 2,
+      "explanation": "Contradicted by the guidelines: adults must not have received assistance during the last 3 years for the same purpose. Only children below 12 years have a 1-year interval limit.",
+      "corrected_claim": "Official source specification (ADIP_English (4).pdf, Page 3 (Para 6.0(6))): Not having received assistance during the last 3 years for the same purpose from any source. However, for children below 12 years of age, the minimum time of assistance is one year.",
+      "verification_status": "VERIFIED"
+    },
+    {
+      "id": "BG-007",
+      "scheme": "ADIP Scheme",
+      "language": "English",
+      "difficulty": "Standard",
+      "category": "Direct Support",
+      "input_text": "The ADIP scheme provides a monthly stipend of Rs. 5,000 for attending advanced digital literacy software classes for visually impaired adults.",
+      "atomic_claims": [
+        "ADIP provides a Rs. 5,000/month digital literacy stipend for visually impaired adults."
+      ],
+      "expected_verdict": "NEED MANUAL VERIFICATION",
+      "evidence_quote": "NEED MANUAL VERIFICATION",
+      "source_filename": "ADIP_English (4).pdf",
+      "printed_page": "N/A",
+      "pdf_page_index": null,
+      "explanation": "The ADIP guidelines cover assistive aids, surgical corrections, high-end prostheses, and cochlear implants, but do not mention any Rs. 5,000 monthly digital literacy stipend.",
+      "corrected_claim": null,
+      "verification_status": "VERIFIED"
+    },
+    {
+      "id": "BG-008",
+      "scheme": "ADIP Scheme",
+      "language": "Hindi",
+      "difficulty": "Difficult Edge Case",
+      "category": "Direct Support",
+      "input_text": "एिडप योजना के तहत 60 वष स े अिधक आय ु वाले व र नागरि क को ितवष म ु त च मे िवत र त करने के िलए एक पृथक वृ ाव था उप-घटक संचािलत कया जाता ह।",
+      "atomic_claims": [
+        "ADIP operates a specific senior citizen sub-component distributing free spectacles annually."
+      ],
+      "expected_verdict": "NEED MANUAL VERIFICATION",
+      "evidence_quote": "NEED MANUAL VERIFICATION",
+      "source_filename": "ADIP_Hindi(4).pdf",
+      "printed_page": "N/A",
+      "pdf_page_index": null,
+      "explanation": "The ADIP scheme guidelines define beneficiary eligibility across all ages based on disability and income, but contain no reference to an annual free spectacles sub-component for senior citizens.",
+      "corrected_claim": null,
+      "verification_status": "VERIFIED"
+    },
+    {
+      "id": "BG-009",
+      "scheme": "ADIP Scheme (Difficult: Numerical Errors & Reversed Condition)",
+      "language": "English",
+      "difficulty": "Difficult Edge Case",
+      "category": "Direct Contradiction / Distortion",
+      "input_text": "Under ADIP, beneficiaries with severe locomotor disability aged 16 and above having mental impairment are eligible for motorized tricycles with a maximum subsidy of Rs. 30,000 provided once every 3 years.",
+      "atomic_claims": [
+        "Persons with mental impairment aged 16+ are eligible for motorized tricycles under ADIP.",
+        "Maximum subsidy for motorized tricycles is Rs. 30,000.",
+        "Frequency of motorized tricycle assistance is once every 3 years."
+      ],
+      "expected_verdict": "BLOCKED",
+      "evidence_quote": "Persons with severe disability of 16 years and above age having mental impairment shall not be eligible for Motorized tricycles and wheel chairs since it puts them at a risk of serious accident/physical harm.\" and \"Extent of subsidy would be Rs.50,000/-. This will be provided to persons aged 16 years and above, once in five years.",
+      "source_filename": "ADIP_English (4).pdf",
+      "printed_page": "Page 4 (Para 7.01(3))",
+      "pdf_page_index": 3,
+      "explanation": "Contains three distinct errors: persons with mental impairment are explicitly excluded for safety reasons; the subsidy ceiling is Rs. 50,000 (not 30,000); and the frequency limit is once in 5 years (not 3 years).",
+      "corrected_claim": "Official source specification (ADIP_English (4).pdf, Page 4 (Para 7.01(3))): Persons with severe disability of 16 years and above age having mental impairment shall not be eligible for Motorized tricycles and wheel chairs since it puts them at a risk of serious accident/physical harm.\" and \"Extent of subsidy would be Rs.50,000/-. This will be provided to persons aged 16 years and above, once in five years.",
+      "verification_status": "VERIFIED"
+    },
+    {
+      "id": "BG-010",
+      "scheme": "ADIP Scheme (Difficult: Mixed Correct & Incorrect Claims)",
+      "language": "Hindi",
+      "difficulty": "Difficult Edge Case",
+      "category": "Direct Contradiction / Distortion",
+      "input_text": "एिडप योजना म लाभा थय के िलए 40% यूनतम द ांगता अनिु वाह ह, तथा योजना म सम त लाभा थय म कम स े कम 50% बािलका/मिहला लाभाथ होना अिनवाय ह।",
+      "atomic_claims": [
+        "Minimum disability threshold under ADIP is 40%.",
+        "Mandatory reservation for female/girl beneficiaries is 50%."
+      ],
+      "expected_verdict": "BLOCKED",
+      "evidence_quote": "40% द ांगता का माणप (बचमाक द ांगता) रखता हो\" and \"सम त लाभा थय का कम से कम 25 ितशत बािलका/मिहला ह गी।",
+      "source_filename": "ADIP_Hindi(4).pdf",
+      "printed_page": "Page 3 (Para 6.0(2)) & Page 5 (Para 8.01(10))",
+      "pdf_page_index": 2,
+      "explanation": "Mixed claim prompt: while the 40% benchmark disability requirement is true, the mandatory percentage of female beneficiaries is 25%, not 50%.",
+      "corrected_claim": "Official source specification (ADIP_Hindi(4).pdf, Page 3 (Para 6.0(2)) & Page 5 (Para 8.01(10))): 40% द ांगता का माणप (बचमाक द ांगता) रखता हो\" and \"सम त लाभा थय का कम से कम 25 ितशत बािलका/मिहला ह गी।",
+      "verification_status": "VERIFIED"
+    },
+    {
+      "id": "BG-011",
+      "scheme": "PMFME Scheme",
+      "language": "English",
+      "difficulty": "Standard",
+      "category": "Direct Support",
+      "input_text": "Under the PMFME scheme, Self Help Group (SHG) members engaged in food processing are eligible to receive seed capital at the rate of Rs. 40,000 per member for working capital and purchase of small tools.",
+      "atomic_claims": [
+        "Seed capital under PMFME is provided at Rs. 40,000 per SHG member for working capital and small tools."
+      ],
+      "expected_verdict": "ACCEPTED",
+      "evidence_quote": "Seed capital @ Rs40,000/- per member of SHG for working capital and purchase of small tools would be provided under the scheme",
+      "source_filename": "PMFME English (2).pdf",
+      "printed_page": "Page 10 (Para 5.3.2(1))",
+      "pdf_page_index": 9,
+      "explanation": "Directly supported by Section 5.3.2(1) of PMFME English guidelines.",
+      "corrected_claim": null,
+      "verification_status": "VERIFIED"
+    },
+    {
+      "id": "BG-012",
+      "scheme": "PMFME Scheme",
+      "language": "Hindi",
+      "difficulty": "Standard",
+      "category": "Direct Support",
+      "input_text": "पीएम एफएमई योजना के अंतगत िनजी सू म खा सं क रण उ म के आवेदक क आयु 18 वष से अिधक होनी चािहए तथा कम से कम 8व िक ा क शैिणक यो यता होना आव यक ह।",
+      "atomic_claims": [
+        "Individual applicant must be above 18 years of age.",
+        "Minimum educational qualification required is passing 8th standard."
+      ],
+      "expected_verdict": "ACCEPTED",
+      "evidence_quote": "आवेदक 18 वष से अिधक का होना चािहए और कम से कम 8वी ं क ा की शैिणक यो य ता रखता हो;",
+      "source_filename": "PM FME HINDI (2).pdf",
+      "printed_page": "Page 7 (Para 4.2(8))",
+      "pdf_page_index": 6,
+      "explanation": "Both age (18+) and educational qualification (8th pass) match the Hindi guidelines exactly.",
+      "corrected_claim": null,
+      "verification_status": "VERIFIED"
+    },
+    {
+      "id": "BG-013",
+      "scheme": "PMFME Scheme",
+      "language": "English",
+      "difficulty": "Standard",
+      "category": "Direct Support",
+      "input_text": "For individual micro food processing enterprises, credit-linked capital subsidy under PMFME is provided at 35% of the eligible project cost, subject to a maximum ceiling of Rs. 10 lakh.",
+      "atomic_claims": [
+        "Individual micro enterprises receive credit-linked capital subsidy at 35% of eligible project cost.",
+        "Maximum subsidy cap for individual enterprise is Rs. 10 lakh."
+      ],
+      "expected_verdict": "ACCEPTED",
+      "evidence_quote": "The main expenditure under the Scheme is credit linked grant @35% for the for micro food processing enterprises subject to a maximum of Rs.10 lakh.",
+      "source_filename": "PMFME English (2).pdf",
+      "printed_page": "Page 22 (Para 13.1)",
+      "pdf_page_index": 21,
+      "explanation": "Matches the core expenditure rules in Para 13.1 and Para 5.3.3.",
+      "corrected_claim": null,
+      "verification_status": "VERIFIED"
+    },
+    {
+      "id": "BG-014",
+      "scheme": "PMFME Scheme",
+      "language": "English",
+      "difficulty": "Difficult Edge Case",
+      "category": "Direct Contradiction / Distortion",
+      "input_text": "Under PMFME, Farmer Producer Organizations (FPOs) receive a credit-linked grant of 50% of project cost without any minimum turnover or experience requirements.",
+      "atomic_claims": [
+        "FPOs receive grant at 50% credit linkage.",
+        "FPOs have no turnover or experience requirements."
+      ],
+      "expected_verdict": "BLOCKED",
+      "evidence_quote": "Grant @35% with credit linkage;\" and \"It should have minimum turnover of Rs.1 crore;\" and \"The members should have sufficient knowledge and experience in dealing with the product for a minimum period of 3 years.",
+      "source_filename": "PMFME English (2).pdf",
+      "printed_page": "Page 9-10 (Para 5.2.1 & 5.2.2)",
+      "pdf_page_index": 8,
+      "explanation": "Grant rate is 35% (not 50%), and FPOs must have at least Rs. 1 crore turnover and 3 years of product handling experience.",
+      "corrected_claim": "Official source specification (PMFME English (2).pdf, Page 9-10 (Para 5.2.1 & 5.2.2)): Grant @35% with credit linkage;\" and \"It should have minimum turnover of Rs.1 crore;\" and \"The members should have sufficient knowledge and experience in dealing with the product for a minimum period of 3 years.",
+      "verification_status": "VERIFIED"
+    },
+    {
+      "id": "BG-015",
+      "scheme": "PMFME Scheme",
+      "language": "Hindi",
+      "difficulty": "Difficult Edge Case",
+      "category": "Direct Contradiction / Distortion",
+      "input_text": "पीएम एफएमई योजना के तहत िनजी सू म उ म हेतु भूिम क क्रय लागत को प रयोजना लागत म शािमल कया जाता ह।",
+      "atomic_claims": [
+        "Land purchase cost is included in the project cost calculation for individual micro enterprises under PMFME."
+      ],
+      "expected_verdict": "BLOCKED",
+      "evidence_quote": "भूिम की लागत प रयोजना लागत म शािमल नही ं की जानी चािहए । तैयार बने ए की लागत तथा लंबी प ाविध अथवा िकराए पर वक शेड को प रयोजना लागत म शािमल म िकया जा सकता है ।",
+      "source_filename": "PM FME HINDI (2).pdf",
+      "printed_page": "Page 7 (Para 4.2(11))",
+      "pdf_page_index": 6,
+      "explanation": "Explicitly contradicted by Para 4.2(11), which mandates that the cost of land must NOT be included in the project cost.",
+      "corrected_claim": "Official source specification (PM FME HINDI (2).pdf, Page 7 (Para 4.2(11))): भूिम की लागत प रयोजना लागत म शािमल नही ं की जानी चािहए । तैयार बने ए की लागत तथा लंबी प ाविध अथवा िकराए पर वक शेड को प रयोजना लागत म शािमल म िकया जा सकता है ।",
+      "verification_status": "VERIFIED"
+    },
+    {
+      "id": "BG-016",
+      "scheme": "PMFME Scheme",
+      "language": "English",
+      "difficulty": "Difficult Edge Case",
+      "category": "Direct Contradiction / Distortion",
+      "input_text": "Under PMFME, multiple members belonging to the same family are each eligible to receive individual financial assistance for separate micro enterprises.",
+      "atomic_claims": [
+        "Multiple members from the same family can each obtain individual financial assistance under PMFME."
+      ],
+      "expected_verdict": "BLOCKED",
+      "evidence_quote": "Only one person from one family would be eligible for obtaining financial assistance. The 'family' for this purpose would include self, spouse and children.",
+      "source_filename": "PMFME English (2).pdf",
+      "printed_page": "Page 7 (Para 4.2(9))",
+      "pdf_page_index": 6,
+      "explanation": "Para 4.2(9) restricts financial assistance eligibility to only one person per family.",
+      "corrected_claim": "Official source specification (PMFME English (2).pdf, Page 7 (Para 4.2(9))): Only one person from one family would be eligible for obtaining financial assistance. The 'family' for this purpose would include self, spouse and children.",
+      "verification_status": "VERIFIED"
+    },
+    {
+      "id": "BG-017",
+      "scheme": "PMFME Scheme",
+      "language": "English",
+      "difficulty": "Standard",
+      "category": "Direct Support",
+      "input_text": "PMFME provides 100% tax exemption on export profits for micro food enterprises operating within Special Economic Zones for 10 consecutive years.",
+      "atomic_claims": [
+        "PMFME grants 100% income tax exemption on export profits in SEZs for 10 years."
+      ],
+      "expected_verdict": "NEED MANUAL VERIFICATION",
+      "evidence_quote": "NEED MANUAL VERIFICATION",
+      "source_filename": "PMFME English (2).pdf",
+      "printed_page": "N/A",
+      "pdf_page_index": null,
+      "explanation": "PMFME guidelines cover credit-linked grants, seed capital, and common infrastructure, but do not contain any 10-year SEZ export tax exemption provision.",
+      "corrected_claim": null,
+      "verification_status": "VERIFIED"
+    },
+    {
+      "id": "BG-018",
+      "scheme": "PMFME Scheme",
+      "language": "Hindi",
+      "difficulty": "Difficult Edge Case",
+      "category": "Direct Support",
+      "input_text": "पीएम एफएमई योजना के तहत खा सं क रण यूिनट को सौर ऊजा संयं लगाने के िलए 2 लाख पये का अित र अनुदान िदया जाता ह।",
+      "atomic_claims": [
+        "PMFME provides an additional Rs. 2 lakh grant for installing solar energy plants in food processing units."
+      ],
+      "expected_verdict": "NEED MANUAL VERIFICATION",
+      "evidence_quote": "NEED MANUAL VERIFICATION",
+      "source_filename": "PM FME HINDI (2).pdf",
+      "printed_page": "N/A",
+      "pdf_page_index": null,
+      "explanation": "The PMFME guidelines detail DPR preparation assistance and capital grants, but make no mention of a Rs. 2 lakh solar installation grant.",
+      "corrected_claim": null,
+      "verification_status": "VERIFIED"
+    },
+    {
+      "id": "BG-019",
+      "scheme": "PMFME Scheme (Difficult: Numerical Errors & Threshold Distortions)",
+      "language": "English",
+      "difficulty": "Difficult Edge Case",
+      "category": "Direct Contradiction / Distortion",
+      "input_text": "For DPR preparation assistance, FPOs and Cooperatives receive Rs. 1,00,000 per case under PMFME, and all group grant proposals above Rs. 5 lakh require central MoFPI approval.",
+      "atomic_claims": [
+        "DPR preparation assistance is Rs. 1,00,000 per case for FPOs/Cooperatives.",
+        "Any group proposal for assistance above Rs. 5 lakh must be sent to MoFPI for approval."
+      ],
+      "expected_verdict": "BLOCKED",
+      "evidence_quote": "Assistance of Rs. 50,000/- per case would be provided to FPOs/SHGs/ Cooperatives for preparation of DPR;\" and \"Any proposal for assistance to a group for grant above Rs.10 lakh should be sent to MOFPI for approval.",
+      "source_filename": "PMFME English (2).pdf",
+      "printed_page": "Page 12 (Para 6.3.1(3) & 6.3.1(6))",
+      "pdf_page_index": 11,
+      "explanation": "Contains two numerical errors: DPR assistance is Rs. 50,000 per case (not 1,00,000), and the threshold for sending group proposals to MoFPI for approval is above Rs. 10 lakh (not 5 lakh).",
+      "corrected_claim": "Official source specification (PMFME English (2).pdf, Page 12 (Para 6.3.1(3) & 6.3.1(6))): Assistance of Rs. 50,000/- per case would be provided to FPOs/SHGs/ Cooperatives for preparation of DPR;\" and \"Any proposal for assistance to a group for grant above Rs.10 lakh should be sent to MOFPI for approval.",
+      "verification_status": "VERIFIED"
+    },
+    {
+      "id": "BG-020",
+      "scheme": "PMFME Scheme (Difficult: Negation & Reversed Condition)",
+      "language": "Hindi",
+      "difficulty": "Difficult Edge Case",
+      "category": "Direct Contradiction / Distortion",
+      "input_text": "एसएचजी महासंघ ारा सद य को दी जाने वाली ारं िभक पूंजी अदेय अनुदान (नॉन-रिपेबल ग्रांट) होती ह िजसका पुनभुगतान सद य को नह करना पड़ता।",
+      "atomic_claims": [
+        "Seed capital given to SHG members by the SHG Federation is a non-repayable grant to the member."
+      ],
+      "expected_verdict": "BLOCKED",
+      "evidence_quote": "यह एसएनए/एसआरएलएम ारा एसएचजी फै डरे शन को अनुदान के प म दी जाएगी । एसएचजी संघ यह रािश एसएचजी के सद य ो ं को ऋण के प म उपल ध कराई जाएगी तािक उसका एसएचजी पुनभुगतान िकया जा सके ।",
+      "source_filename": "PM FME HINDI (2).pdf",
+      "printed_page": "Page 8 (Para 5.3.2(4))",
+      "pdf_page_index": 7,
+      "explanation": "While SNA/SRLM gives seed capital as a grant to the SHG Federation, the Federation provides it to individual members as a *repayable loan*, contradicting the claim that members do not repay it.",
+      "corrected_claim": "Official source specification (PM FME HINDI (2).pdf, Page 8 (Para 5.3.2(4))): यह एसएनए/एसआरएलएम ारा एसएचजी फै डरे शन को अनुदान के प म दी जाएगी । एसएचजी संघ यह रािश एसएचजी के सद य ो ं को ऋण के प म उपल ध कराई जाएगी तािक उसका एसएचजी पुनभुगतान िकया जा सके ।",
+      "verification_status": "VERIFIED"
+    },
+    {
+      "id": "BG-021",
+      "scheme": "PMAY-U 2.0",
+      "language": "English",
+      "difficulty": "Standard",
+      "category": "Direct Support",
+      "input_text": "Under PMAY-U 2.0, annual income brackets for urban households are defined as up to Rs. 3 lakh for EWS, between Rs. 3 lakh and Rs. 6 lakh for LIG, and between Rs. 6 lakh and Rs. 9 lakh for MIG.",
+      "atomic_claims": [
+        "EWS annual household income ceiling is up to Rs. 3 lakh.",
+        "LIG annual household income is defined from Rs. 3 lakh up to Rs. 6 lakh.",
+        "MIG annual household income is defined from Rs. 6 lakh up to Rs. 9 lakh."
+      ],
+      "expected_verdict": "ACCEPTED",
+      "evidence_quote": "EWS households are defined as households with an annual income of up to ₹3 lakh. LIG is defined as households with an annual income from ₹3 lakh up to ₹6 lakh. MIG is defined as households with an annual income from ₹6 lakh up to ₹9 lakh.",
+      "source_filename": "PMAY-English (1).pdf",
+      "printed_page": "Page 3 (Para 3.3)",
+      "pdf_page_index": 2,
+      "explanation": "Directly matches Para 3.3 of PMAY-U 2.0 English Guidelines.",
+      "corrected_claim": null,
+      "verification_status": "VERIFIED"
+    },
+    {
+      "id": "BG-022",
+      "scheme": "PMAY-U 2.0",
+      "language": "Hindi",
+      "difficulty": "Standard",
+      "category": "Direct Support",
+      "input_text": "पीएमएवाई-यू 2.0 के अंतगत लाभार्थी परिवार के पास भारत के किसी भी हिस्से में अपने या अपने परिवार के किसी सदस्य के नाम पर पक्का मकान नहीं होना चाहिए।",
+      "atomic_claims": [
+        "Beneficiary family under PMAY-U 2.0 must not own a pucca house anywhere in India."
+      ],
+      "expected_verdict": "ACCEPTED",
+      "evidence_quote": "‘kgjh {ks=ksa esa jgus okys ÃMCY;w,l@,yvkÃth@,evkÃth Jsf.k;ksa ls lacafèkr ifjokjksa ds ikl Hkkjr ds fdlh Hkh fgLls esa mlds uke ij ;k mlds ifjokj ds fdlh lnL; ds uke ij iDdk vkokl ¼lHkh ekSlekuqdwy vkoklh; bdkÃ½ ugÈ gksuk pkfg,A",
+      "source_filename": "PMAY-U-2-Hindi (1).pdf",
+      "printed_page": "Page 2 (Glossary / Definitions)",
+      "pdf_page_index": 1,
+      "explanation": "Accurately reflects the core eligibility requirement stated in PMAY-U 2.0 Hindi Guidelines.",
+      "corrected_claim": null,
+      "verification_status": "VERIFIED"
+    },
+    {
+      "id": "BG-023",
+      "scheme": "PMAY-U 2.0",
+      "language": "English",
+      "difficulty": "Standard",
+      "category": "Direct Support",
+      "input_text": "Under the Interest Subsidy Scheme (ISS) of PMAY-U 2.0, eligible beneficiaries with home loans up to Rs. 25 lakh for property value up to Rs. 35 lakh can receive an interest subsidy of up to Rs. 1.80 lakh (max NPV of Rs. 1.50 lakh at 8.5% discount rate) released in 5 equal yearly installments.",
+      "atomic_claims": [
+        "Max loan value eligible for ISS is Rs. 25 lakh for property value up to Rs. 35 lakh.",
+        "Max interest subsidy release is Rs. 1.80 lakh with max NPV of Rs. 1.50 lakh at 8.5% discount rate.",
+        "Subsidy is released in 5 equal yearly installments."
+      ],
+      "expected_verdict": "ACCEPTED",
+      "evidence_quote": "A maximum release of interest subsidy of ₹1.80 lakh having maximum NPV of ₹1.50 lakh (at Discount Rate of 8.5%) shall be provided to eligible beneficiaries having a loan tenure of more than five years. Households having income up to ₹9 lakh, loan value up to ₹25 lakh for property value up to ₹35 lakh would be eligible for a subsidy at 4.0 % on first ₹8 lakh for a tenure up to 12 years. ... Subsidy to the beneficiaries will be released in 5 equal yearly instalments.",
+      "source_filename": "PMAY-English (1).pdf",
+      "printed_page": "Page 24 (Para 5.4.3)",
+      "pdf_page_index": 23,
+      "explanation": "Fully supported by Para 5.4.3 of PMAY-English (1).pdf.",
+      "corrected_claim": null,
+      "verification_status": "VERIFIED"
+    },
+    {
+      "id": "BG-024",
+      "scheme": "PMAY-U 2.0",
+      "language": "English",
+      "difficulty": "Difficult Edge Case",
+      "category": "Direct Contradiction / Distortion",
+      "input_text": "An urban family is eligible for PMAY-U 2.0 benefits even if they were allotted a government house 5 years ago under another government housing scheme.",
+      "atomic_claims": [
+        "Allotment of a government house 5 years ago does not disqualify a beneficiary from PMAY-U 2.0."
+      ],
+      "expected_verdict": "BLOCKED",
+      "evidence_quote": "The beneficiary who has been allotted house under any of the housing scheme of Central Government, State/UT Government and Local Self Government in last 20 years in urban or rural areas, shall not be eligible to seek benefit under PMAY-U 2.0.",
+      "source_filename": "PMAY-English (1).pdf",
+      "printed_page": "Page 3 (Para 3.2)",
+      "pdf_page_index": 2,
+      "explanation": "The guidelines impose a strict 20-year restriction bar against prior beneficiaries of any government housing scheme.",
+      "corrected_claim": "Official source specification (PMAY-English (1).pdf, Page 3 (Para 3.2)): The beneficiary who has been allotted house under any of the housing scheme of Central Government, State/UT Government and Local Self Government in last 20 years in urban or rural areas, shall not be eligible to seek benefit under PMAY-U 2.0.",
+      "verification_status": "VERIFIED"
+    },
+    {
+      "id": "BG-025",
+      "scheme": "PMAY-U 2.0",
+      "language": "Hindi",
+      "difficulty": "Difficult Edge Case",
+      "category": "Direct Contradiction / Distortion",
+      "input_text": "पीएमएवाई-यू 2.0 के आईएसएस घटक के तहत लाभार्थी अपनी इच्छानुसार 5 वर्षों के भीतर मकान को किसी अन्य व्यक्ति को बेच या स्थानांतरित कर सकता है।",
+      "atomic_claims": [
+        "Beneficiary under ISS vertical can sell or transfer the house within 5 years of receiving subsidy."
+      ],
+      "expected_verdict": "BLOCKED",
+      "evidence_quote": "I hereby declare that I shall not sell out/transfer the house for which subsidy has been received under ISS vertical of PMAY-U 2.0 Scheme up to the period of Five (5) years from the date of release of the first instalment.",
+      "source_filename": "PMAY-U-2-Hindi (1).pdf",
+      "printed_page": "Page 53 (Self-Undertaking ISS)",
+      "pdf_page_index": 52,
+      "explanation": "The mandatory self-undertaking explicitly prohibits selling or transferring the house for 5 years from release of the first installment.",
+      "corrected_claim": "Official source specification (PMAY-U-2-Hindi (1).pdf, Page 53 (Self-Undertaking ISS)): I hereby declare that I shall not sell out/transfer the house for which subsidy has been received under ISS vertical of PMAY-U 2.0 Scheme up to the period of Five (5) years from the date of release of the first instalment.",
+      "verification_status": "VERIFIED"
+    },
+    {
+      "id": "BG-026",
+      "scheme": "PMAY-U 2.0",
+      "language": "English",
+      "difficulty": "Difficult Edge Case",
+      "category": "Direct Contradiction / Distortion",
+      "input_text": "Under PMAY-U 2.0, standard Central Assistance for Beneficiary Led Construction (BLC) in plain states is Rs. 5.00 lakh per dwelling unit.",
+      "atomic_claims": [
+        "Central Assistance for BLC in plain states is Rs. 5.00 lakh per unit."
+      ],
+      "expected_verdict": "BLOCKED",
+      "evidence_quote": "All other States: Central Govt. - ₹ 1.5 lakh/Unit; State Govt. - Min. ₹1.00 lakh/Unit",
+      "source_filename": "PMAY-English (1).pdf",
+      "printed_page": "Page 29 (Para 8.1 Table)",
+      "pdf_page_index": 28,
+      "explanation": "Central assistance for BLC in general states is Rs. 1.50 lakh per unit (and Rs. 2.25 lakh in NE/Himalayan states), not Rs. 5.00 lakh.",
+      "corrected_claim": "Official source specification (PMAY-English (1).pdf, Page 29 (Para 8.1 Table)): All other States: Central Govt. - ₹ 1.5 lakh/Unit; State Govt. - Min. ₹1.00 lakh/Unit",
+      "verification_status": "VERIFIED"
+    },
+    {
+      "id": "BG-027",
+      "scheme": "PMAY-U 2.0",
+      "language": "English",
+      "difficulty": "Standard",
+      "category": "Direct Support",
+      "input_text": "PMAY-U 2.0 provides a free electric 2-wheeler voucher worth Rs. 50,000 to every EWS house owner upon house completion.",
+      "atomic_claims": [
+        "PMAY-U 2.0 awards a free Rs. 50,000 electric 2-wheeler voucher upon house completion."
+      ],
+      "expected_verdict": "NEED MANUAL VERIFICATION",
+      "evidence_quote": "NEED MANUAL VERIFICATION",
+      "source_filename": "PMAY-English (1).pdf",
+      "printed_page": "N/A",
+      "pdf_page_index": null,
+      "explanation": "PMAY-U 2.0 guidelines specify central assistance, Technology Innovation Grants, and Redeemable Housing Vouchers for purchase/construction, but contain no electric 2-wheeler voucher provision.",
+      "corrected_claim": null,
+      "verification_status": "VERIFIED"
+    },
+    {
+      "id": "BG-028",
+      "scheme": "PMAY-U 2.0",
+      "language": "Hindi",
+      "difficulty": "Difficult Edge Case",
+      "category": "Direct Support",
+      "input_text": "पीएमएवाई-यू 2.0 के तहत सभी लाभार्थी परिवारों को 10 वर्षों तक प्रति माह 100 यूनिट मुफ्त बिजली प्रदान की जाती है।",
+      "atomic_claims": [
+        "PMAY-U 2.0 beneficiaries receive 100 units of free electricity per month for 10 years."
+      ],
+      "expected_verdict": "NEED MANUAL VERIFICATION",
+      "evidence_quote": "NEED MANUAL VERIFICATION",
+      "source_filename": "PMAY-U-2-Hindi (1).pdf",
+      "printed_page": "N/A",
+      "pdf_page_index": null,
+      "explanation": "Free electricity distribution is not a component of PMAY-U 2.0 guidelines.",
+      "corrected_claim": null,
+      "verification_status": "VERIFIED"
+    },
+    {
+      "id": "BG-029",
+      "scheme": "PMAY-U 2.0 (Difficult: Eligibility Change & Numerical Distortions)",
+      "language": "English",
+      "difficulty": "Difficult Edge Case",
+      "category": "Direct Contradiction / Distortion",
+      "input_text": "Under PMAY-U 2.0 ISS, Middle Income Group (MIG) households with annual income up to Rs. 18 lakh are eligible for home loan subsidy up to Rs. 2.67 lakh.",
+      "atomic_claims": [
+        "MIG annual income ceiling under PMAY-U 2.0 ISS is Rs. 18 lakh.",
+        "Max subsidy under ISS is Rs. 2.67 lakh."
+      ],
+      "expected_verdict": "BLOCKED",
+      "evidence_quote": "MIG is defined as households with an annual income from ₹6 lakh up to ₹9 lakh.\" and \"A maximum release of interest subsidy of ₹1.80 lakh having maximum NPV of ₹1.50 lakh",
+      "source_filename": "PMAY-English (1).pdf",
+      "printed_page": "Page 3 (Para 3.3) & Page 24 (Para 5.4.3)",
+      "pdf_page_index": 2,
+      "explanation": "Confuses legacy PMAY-U CLSS parameters (which had MIG up to 18 lakh and 2.67 lakh subsidy) with PMAY-U 2.0 ISS rules, where MIG ceiling is Rs. 9 lakh and max subsidy is Rs. 1.80 lakh.",
+      "corrected_claim": "Official source specification (PMAY-English (1).pdf, Page 3 (Para 3.3) & Page 24 (Para 5.4.3)): MIG is defined as households with an annual income from ₹6 lakh up to ₹9 lakh.\" and \"A maximum release of interest subsidy of ₹1.80 lakh having maximum NPV of ₹1.50 lakh",
+      "verification_status": "VERIFIED"
+    },
+    {
+      "id": "BG-030",
+      "scheme": "PMAY-U 2.0 (Difficult: Multiple Claims & Reversed Condition)",
+      "language": "Hindi",
+      "difficulty": "Difficult Edge Case",
+      "category": "Direct Contradiction / Distortion",
+      "input_text": "पीएमएवाई-यू 2.0 की अवधि 10 वर्ष (2024 से 2034) है, तथा प्राथमिक ऋणदाता संस्थाएं (PLI) पात्र लाभार्थियों से 10,000 रुपये का अनिवार्य प्रोसेसिंग शुल्क वसूल सकती हैं।",
+      "atomic_claims": [
+        "Scheme implementation period is 10 years from 2024 to 2034.",
+        "Primary Lending Institutions (PLIs) can charge beneficiaries a mandatory processing fee of Rs. 10,000."
+      ],
+      "expected_verdict": "BLOCKED",
+      "evidence_quote": "Pradhan Mantri Awas Yojana - Urban 2.0 (PMAY-U 2.0) – ‘Housing for All’ Mission for urban areas will be implemented for 5 years from 01.09.2024\" and \"PLIs will not take any processing charge from the beneficiary for housing loans up to the eligible loan amount as per income criteria under the Scheme.",
+      "source_filename": "PMAY-English (1).pdf` & `PMAY-U-2-Hindi (1).pdf",
+      "printed_page": "Page 1 (Para 1.1) & Page 35 (Para 10.3)",
+      "pdf_page_index": 0,
+      "explanation": "Both claims are false: implementation period is 5 years (from 01.09.2024), and PLIs are explicitly prohibited from charging processing fees to eligible beneficiaries.",
+      "corrected_claim": "Official source specification (PMAY-English (1).pdf` & `PMAY-U-2-Hindi (1).pdf, Page 1 (Para 1.1) & Page 35 (Para 10.3)): Pradhan Mantri Awas Yojana - Urban 2.0 (PMAY-U 2.0) – ‘Housing for All’ Mission for urban areas will be implemented for 5 years from 01.09.2024\" and \"PLIs will not take any processing charge from the beneficiary for housing loans up to the eligible loan amount as per income criteria under the Scheme.",
+      "verification_status": "VERIFIED"
+    },
+    {
+      "id": "BG-031",
+      "scheme": "SEED Scheme",
+      "language": "English",
+      "difficulty": "Standard",
+      "category": "Direct Support",
+      "input_text": "The SEED scheme is an umbrella initiative for De-notified, Nomadic, and Semi-Nomadic Tribes structured across four core pillars: Educational Empowerment, Health Insurance through PM-JAY, Livelihoods, and Housing.",
+      "atomic_claims": [
+        "SEED targets DNT, NT, and SNT communities.",
+        "Scheme consists of 4 main components: Education, Health Insurance (PM-JAY), Livelihoods, and Housing."
+      ],
+      "expected_verdict": "ACCEPTED",
+      "evidence_quote": "an Umbrella Scheme for empowerment of DNT communities have been prepared and will have following four components... 1. Educational Empowerment... 2. Health (through PMJAY of NHA) 3. Livelihoods... 4. Land and housing",
+      "source_filename": "SEED English (3).pdf",
+      "printed_page": "Page 1 (Para 1.7)",
+      "pdf_page_index": 0,
+      "explanation": "Exactly aligns with Para 1.7 of SEED guidelines.",
+      "corrected_claim": null,
+      "verification_status": "VERIFIED"
+    },
+    {
+      "id": "BG-032",
+      "scheme": "SEED Scheme",
+      "language": "Hindi",
+      "difficulty": "Standard",
+      "category": "Direct Support",
+      "input_text": "सीड (SEED) योजना के तहत डीएनटी, एनटी और एसएनटी परिवारों को आयुष्मान भारत (PM-JAY) के तहत प्रति वर्ष प्रति परिवार 5 लाख रुपये का स्वास्थ्य बीमा कवर प्रदान करने का प्रावधान है।",
+      "atomic_claims": [
+        "SEED health component provides health cover of Rs. 5 lakh per family per year under PM-JAY."
+      ],
+      "expected_verdict": "ACCEPTED",
+      "evidence_quote": "providing a health cover of Rs. 5 lakhs per family per year to DNT, NT and SNT families as per norms of 'Ayushman Bharat PradhanMantri Jan ArogyaYojana.'",
+      "source_filename": "SEED English (3).pdf` & `SEED Hindi (3).pdf",
+      "printed_page": "Page 10 (Para 5.1)",
+      "pdf_page_index": 9,
+      "explanation": "Verbatim matches Para 5.1 of SEED guidelines.",
+      "corrected_claim": null,
+      "verification_status": "VERIFIED"
+    },
+    {
+      "id": "BG-033",
+      "scheme": "SEED Scheme",
+      "language": "English",
+      "difficulty": "Standard",
+      "category": "Direct Support",
+      "input_text": "To be eligible for free competitive exam coaching under the SEED scheme, a DNT candidate's total annual family income from all sources must not exceed Rs. 8 lakh.",
+      "atomic_claims": [
+        "Free coaching eligibility under SEED requires total annual family income of Rs. 8 lakh or less."
+      ],
+      "expected_verdict": "ACCEPTED",
+      "evidence_quote": "Only students belonging to DNT communities having total family income from all sources of Rs 8 lakhs or less per annum and not availing any such benefits from similar Scheme of Centre Government or the State Government will be eligible for benefits under the Scheme.",
+      "source_filename": "SEED English (3).pdf",
+      "printed_page": "Page 4 (Para 4.2.4(1))",
+      "pdf_page_index": 3,
+      "explanation": "Confirmed by Para 4.2.4(1).",
+      "corrected_claim": null,
+      "verification_status": "VERIFIED"
+    },
+    {
+      "id": "BG-034",
+      "scheme": "SEED Scheme",
+      "language": "English",
+      "difficulty": "Difficult Edge Case",
+      "category": "Direct Contradiction / Distortion",
+      "input_text": "A student can avail free competitive exam coaching benefits under the SEED scheme up to 5 times for the same examination.",
+      "atomic_claims": [
+        "SEED free coaching can be availed up to 5 times for the same competitive exam."
+      ],
+      "expected_verdict": "BLOCKED",
+      "evidence_quote": "Benefits under the Scheme can be availed by a particular student not more than twice, irrespective of the number of chances he/she may be entitled to take in a particular competitive examination.",
+      "source_filename": "SEED English (3).pdf",
+      "printed_page": "Page 5 (Para 4.2.4(5))",
+      "pdf_page_index": 4,
+      "explanation": "Explicitly capped at a maximum of twice (2 times) for a particular student.",
+      "corrected_claim": "Official source specification (SEED English (3).pdf, Page 5 (Para 4.2.4(5))): Benefits under the Scheme can be availed by a particular student not more than twice, irrespective of the number of chances he/she may be entitled to take in a particular competitive examination.",
+      "verification_status": "VERIFIED"
+    },
+    {
+      "id": "BG-035",
+      "scheme": "SEED Scheme",
+      "language": "Hindi",
+      "difficulty": "Difficult Edge Case",
+      "category": "Direct Contradiction / Distortion",
+      "input_text": "सीड योजना के तहत मुफ्त कोचिंग प्राप्त करने वाले छात्र साथ ही केंद्र या राज्य सरकार की अन्य समान छात्रवृत्ति योजनाओं का लाभ भी उठा सकते हैं।",
+      "atomic_claims": [
+        "Students availing SEED coaching can simultaneously draw benefits from other similar Central/State scholarship schemes."
+      ],
+      "expected_verdict": "BLOCKED",
+      "evidence_quote": "The candidate shall be precluded from availing any other Scholarship benefits of similar scheme of the Centre or State Governments. The candidate will be required to upload an affidavit indicating that he/she is not availing scholarship from any other similar scheme",
+      "source_filename": "SEED English (3).pdf",
+      "printed_page": "Page 5 (Para 4.2.4(6))",
+      "pdf_page_index": 4,
+      "explanation": "Concurrent benefit drawing is explicitly prohibited; candidates must submit an affidavit confirming non-receipt of other similar scheme benefits.",
+      "corrected_claim": "Official source specification (SEED English (3).pdf, Page 5 (Para 4.2.4(6))): The candidate shall be precluded from availing any other Scholarship benefits of similar scheme of the Centre or State Governments. The candidate will be required to upload an affidavit indicating that he/she is not availing scholarship from any other similar scheme",
+      "verification_status": "VERIFIED"
+    },
+    {
+      "id": "BG-036",
+      "scheme": "SEED Scheme",
+      "language": "English",
+      "difficulty": "Difficult Edge Case",
+      "category": "Direct Contradiction / Distortion",
+      "input_text": "Under SEED, housing financial assistance is granted through a newly established independent SEED bank without any reliance on PMAY-G or PMAY-U.",
+      "atomic_claims": [
+        "SEED housing component is funded and disbursed independently via a dedicated SEED bank rather than PMAY-G/PMAY-U."
+      ],
+      "expected_verdict": "BLOCKED",
+      "evidence_quote": "DWBDNC will facilitate housing assistance to eligible and homeless DNT families under ongoing schemes of central government for houseless persons.\" and \"Land and housing (through PMAY-G, PMAY-U, other government schemes)",
+      "source_filename": "SEED English (3).pdf",
+      "printed_page": "Page 1 (Para 1.7(4)) & Page 30 (Para 7.4)",
+      "pdf_page_index": 0,
+      "explanation": "SEED does not operate an independent housing fund; it facilitates housing via convergence with PMAY-G and PMAY-U guidelines and norms.",
+      "corrected_claim": "Official source specification (SEED English (3).pdf, Page 1 (Para 1.7(4)) & Page 30 (Para 7.4)): DWBDNC will facilitate housing assistance to eligible and homeless DNT families under ongoing schemes of central government for houseless persons.\" and \"Land and housing (through PMAY-G, PMAY-U, other government schemes)",
+      "verification_status": "VERIFIED"
+    },
+    {
+      "id": "BG-037",
+      "scheme": "SEED Scheme",
+      "language": "English",
+      "difficulty": "Standard",
+      "category": "Direct Support",
+      "input_text": "SEED scheme provides 100% overseas university tuition fee coverage up to Rs. 50 lakh for DNT students studying abroad.",
+      "atomic_claims": [
+        "SEED pays 100% overseas tuition fees up to Rs. 50 lakh for DNT students studying abroad."
+      ],
+      "expected_verdict": "NEED MANUAL VERIFICATION",
+      "evidence_quote": "NEED MANUAL VERIFICATION",
+      "source_filename": "SEED English (3).pdf",
+      "printed_page": "N/A",
+      "pdf_page_index": null,
+      "explanation": "SEED covers coaching for domestic competitive exams and tests like GRE/TOEFL, but does not provide an overseas university tuition grant of Rs. 50 lakh.",
+      "corrected_claim": null,
+      "verification_status": "VERIFIED"
+    },
+    {
+      "id": "BG-038",
+      "scheme": "SEED Scheme",
+      "language": "Hindi",
+      "difficulty": "Difficult Edge Case",
+      "category": "Direct Support",
+      "input_text": "सीड योजना के तहत प्रत्येक डीएनटी बस्ती में मुफ्त वाई-फाई हॉटस्पॉट और डिजिटल लाइब्रेरी स्थापित की जाती है।",
+      "atomic_claims": [
+        "SEED installs free Wi-Fi hotspots and digital libraries in every DNT settlement."
+      ],
+      "expected_verdict": "NEED MANUAL VERIFICATION",
+      "evidence_quote": "NEED MANUAL VERIFICATION",
+      "source_filename": "SEED Hindi (3).pdf",
+      "printed_page": "N/A",
+      "pdf_page_index": null,
+      "explanation": "Free Wi-Fi hotspots and digital libraries are not mentioned in the SEED scheme guidelines.",
+      "corrected_claim": null,
+      "verification_status": "VERIFIED"
+    },
+    {
+      "id": "BG-039",
+      "scheme": "SEED Scheme (Difficult: Budget Error & Unlimited Attempt Distortion)",
+      "language": "English",
+      "difficulty": "Difficult Edge Case",
+      "category": "Direct Contradiction / Distortion",
+      "input_text": "The SEED scheme has a total budget of Rs. 2,000 crore to be spent over 10 years, and provides unlimited coaching attempts for UPSC Mains.",
+      "atomic_claims": [
+        "SEED total budget is Rs. 2,000 crore over 10 years.",
+        "Coaching attempts for UPSC Mains under SEED are unlimited."
+      ],
+      "expected_verdict": "BLOCKED",
+      "evidence_quote": "approximate cost of Rs200crore to be spent over a period of 5 years starting FinancialYear2021-22:\" and \"They will be entitled for free coaching upto two times each for Preliminary and Main examinations as per their convenience.",
+      "source_filename": "SEED English (3).pdf",
+      "printed_page": "Page 1 (Para 1.7) & Page 5 (Para 4.2.4(7))",
+      "pdf_page_index": 0,
+      "explanation": "Both claims are false: total budget is Rs. 200 crore over 5 years (not 2,000 crore over 10 years), and Mains coaching is capped at 2 times (not unlimited).",
+      "corrected_claim": "Official source specification (SEED English (3).pdf, Page 1 (Para 1.7) & Page 5 (Para 4.2.4(7))): approximate cost of Rs200crore to be spent over a period of 5 years starting FinancialYear2021-22:\" and \"They will be entitled for free coaching upto two times each for Preliminary and Main examinations as per their convenience.",
+      "verification_status": "VERIFIED"
+    },
+    {
+      "id": "BG-040",
+      "scheme": "SEED Scheme (Difficult: Mandatory Hours & Provider Restriction)",
+      "language": "Hindi",
+      "difficulty": "Difficult Edge Case",
+      "category": "Direct Contradiction / Distortion",
+      "input_text": "सीड मुफ्त कोचिंग योजना म भौतिक (फिजिकल) कोचिंग हेतु प्रति सप्ताह न्यूनतम 5 घंटे की उपस्थिति पर्याप्त है, तथा छात्र केवल सरकारी संस्थानों में ही कोचिंग ले सकते हैं।",
+      "atomic_claims": [
+        "Mandatory physical coaching requirement is 5 hours per week.",
+        "Students are restricted to studying only in government coaching institutes."
+      ],
+      "expected_verdict": "BLOCKED",
+      "evidence_quote": "A minimum physical coaching of 16 hours per week will be mandatory for all the above courses.\" and \"These students shall have the liberty to pursue the coaching course in any institute of their choice.",
+      "source_filename": "SEED English (3).pdf",
+      "printed_page": "Page 6 (Note under Para 4.2.6) & Page 6 (Para 4.2.5)",
+      "pdf_page_index": 5,
+      "explanation": "Contradicts two rules: minimum physical coaching is 16 hours per week (not 5), and students have full freedom to choose any institute of their choice (not restricted to government institutes).",
+      "corrected_claim": "Official source specification (SEED English (3).pdf, Page 6 (Note under Para 4.2.6) & Page 6 (Para 4.2.5)): A minimum physical coaching of 16 hours per week will be mandatory for all the above courses.\" and \"These students shall have the liberty to pursue the coaching course in any institute of their choice.",
+      "verification_status": "VERIFIED"
+    },
+    {
+      "id": "BG-041",
+      "scheme": "NHB Schemes",
+      "language": "English",
+      "difficulty": "Standard",
+      "category": "Direct Support",
+      "input_text": "Under NHB Scheme 2 (Cold Storage), financial assistance for commercial cold storage projects is provided as a credit-linked back-ended subsidy at 40% of capital cost in general areas and 55% in Hilly & Scheduled Areas, for a maximum storage capacity of 5,000 MT per project.",
+      "atomic_claims": [
+        "Subsidy rate is 40% in general areas and 55% in Hilly/Scheduled areas.",
+        "Maximum storage capacity eligible per project is 5,000 MT.",
+        "Subsidy is credit-linked and back-ended."
+      ],
+      "expected_verdict": "ACCEPTED",
+      "evidence_quote": "The assistance will be as credit linked back-ended subsidy @ 40% of the capital cost of project in general areas and 55% in case of Hilly & Scheduled Areas for a maximum storage capacity of 5000 MT per project",
+      "source_filename": "horticulture_ english (5).pdf",
+      "printed_page": "Page 7 (Scheme-2 Pattern of Assistance)",
+      "pdf_page_index": 6,
+      "explanation": "Verbatim alignment with Scheme 2 guidelines in the English NHB PDF.",
+      "corrected_claim": null,
+      "verification_status": "VERIFIED"
+    },
+    {
+      "id": "BG-042",
+      "scheme": "NHB Schemes",
+      "language": "Hindi",
+      "difficulty": "Standard",
+      "category": "Direct Support",
+      "input_text": "राष्ट्रीय बागवानी बोर्ड की वाणिज्यिक बागवानी योजना के तहत खुली खेती (ओपन कल्टीवेशन) के लिए न्यूनतम 4 हेक्टेयर (10 एकड़ से अधिक) तथा संरक्षित खेती (प्रोटेक्टेड कल्टीवेशन) के लिए 1000 वर्ग मीटर से अधिक का क्षेत्र होना आवश्यक है।",
+      "atomic_claims": [
+        "Open cultivation requires project area above 4 hectares (>10 acres).",
+        "Protected cultivation requires project area more than 1000 sq. meters."
+      ],
+      "expected_verdict": "ACCEPTED",
+      "evidence_quote": "The above assistance shall be available for projects covering area above four hectares (above 10 acres) in case of open cultivation, and more than 1000 sq. meter in case of protected cultivation.",
+      "source_filename": "horticulture_ english (5).pdf` & `horticulture_hindi (5).pdf",
+      "printed_page": "Page 1 (Scheme 1 General Conditions)",
+      "pdf_page_index": 0,
+      "explanation": "Exactly backed by the general conditions for Scheme 1.",
+      "corrected_claim": null,
+      "verification_status": "VERIFIED"
+    },
+    {
+      "id": "BG-043",
+      "scheme": "NHB Schemes",
+      "language": "English",
+      "difficulty": "Standard",
+      "category": "Direct Support",
+      "input_text": "Under NHB guidelines, the term loan credit component from a banking institution must be at least 15% more than the admissible subsidy rate.",
+      "atomic_claims": [
+        "Credit component as term loan must be at least 15% more than the admissible rate of subsidy."
+      ],
+      "expected_verdict": "ACCEPTED",
+      "evidence_quote": "Credit component as means of finance of the project should be term loan from banking or non banking financial institutions and should be at least 15 % more than the admissible rate of subsidy.",
+      "source_filename": "horticulture_ english (5).pdf",
+      "printed_page": "Page 1, 3 & 8 (General Conditions)",
+      "pdf_page_index": 0,
+      "explanation": "Repeated across Scheme 1 and Scheme 2 general conditions.",
+      "corrected_claim": null,
+      "verification_status": "VERIFIED"
+    },
+    {
+      "id": "BG-044",
+      "scheme": "NHB Schemes",
+      "language": "English",
+      "difficulty": "Difficult Edge Case",
+      "category": "Direct Contradiction / Distortion",
+      "input_text": "NHB provides 100% upfront cash grant directly to farmers before project construction begins, without requiring bank credit.",
+      "atomic_claims": [
+        "NHB subsidy is a 100% upfront direct cash grant.",
+        "Bank term loan/credit linkage is not required."
+      ],
+      "expected_verdict": "BLOCKED",
+      "evidence_quote": "Credit linked back-ended subsidy\" and \"Credit component as means of finance of the project should be term loan from banking or non banking financial institutions and should be at least 15 % more than the admissible rate of subsidy.",
+      "source_filename": "horticulture_ english (5).pdf",
+      "printed_page": "Page 1 (Scheme 1 Pattern of Assistance)",
+      "pdf_page_index": 0,
+      "explanation": "NHB subsidies are strictly credit-linked and back-ended (disbursed into loan accounts upon project completion), never upfront cash grants.",
+      "corrected_claim": "Official source specification (horticulture_ english (5).pdf, Page 1 (Scheme 1 Pattern of Assistance)): Credit linked back-ended subsidy\" and \"Credit component as means of finance of the project should be term loan from banking or non banking financial institutions and should be at least 15 % more than the admissible rate of subsidy.",
+      "verification_status": "VERIFIED"
+    },
+    {
+      "id": "BG-045",
+      "scheme": "NHB Schemes",
+      "language": "Hindi",
+      "difficulty": "Difficult Edge Case",
+      "category": "Direct Contradiction / Distortion",
+      "input_text": "एनएचबी योजना 2 के अंतर्गत नियंत्रित वातावरण (सीए) कोल्ड स्टोरेज के निर्माण हेतु 1,00,000 रुपये प्रति मीट्रिक टन की दर से सब्सिडी दी जाती है।",
+      "atomic_claims": [
+        "CA cold storage normative cost rate under Scheme 2 is Rs. 1,00,000 per MT."
+      ],
+      "expected_verdict": "BLOCKED",
+      "evidence_quote": "4. CA Storages (@ Rs 32,000 per MT)\" (Hindi: \"lh, laxzgxkj 32000 #- izfr ,eVh dh nj lsA\")",
+      "source_filename": "horticulture_ english (5).pdf` & `horticulture_hindi (5).pdf",
+      "printed_page": "Page 8 (Scheme 2 Norms)",
+      "pdf_page_index": 7,
+      "explanation": "The normative cost for CA storage is explicitly set at Rs. 32,000 per MT, not Rs. 1,00,000 per MT.",
+      "corrected_claim": "Official source specification (horticulture_ english (5).pdf` & `horticulture_hindi (5).pdf, Page 8 (Scheme 2 Norms)): 4. CA Storages (@ Rs 32,000 per MT)\" (Hindi: \"lh, laxzgxkj 32000 #- izfr ,eVh dh nj lsA\")",
+      "verification_status": "VERIFIED"
+    },
+    {
+      "id": "BG-046",
+      "scheme": "NHB Schemes",
+      "language": "English",
+      "difficulty": "Difficult Edge Case",
+      "category": "Direct Contradiction / Distortion",
+      "input_text": "NHB Scheme 5 (Horticulture Promotion Service) requires targeted beneficiaries to contribute 50% of the cost of techno-economic feasibility studies.",
+      "atomic_claims": [
+        "Beneficiaries must pay 50% of the study cost under Scheme 5."
+      ],
+      "expected_verdict": "BLOCKED",
+      "evidence_quote": "Pattern of Assistance for above components: 100% cost of the study shall be borne by the Board.",
+      "source_filename": "horticulture_ english (5).pdf",
+      "printed_page": "Page 19 (Scheme 5 Pattern of Assistance)",
+      "pdf_page_index": 18,
+      "explanation": "Scheme 5 specifies that 100% of the study cost is borne by the National Horticulture Board.",
+      "corrected_claim": "Official source specification (horticulture_ english (5).pdf, Page 19 (Scheme 5 Pattern of Assistance)): Pattern of Assistance for above components: 100% cost of the study shall be borne by the Board.",
+      "verification_status": "VERIFIED"
+    },
+    {
+      "id": "BG-047",
+      "scheme": "NHB Schemes",
+      "language": "English",
+      "difficulty": "Standard",
+      "category": "Direct Support",
+      "input_text": "NHB offers a guaranteed 10-year minimum support price (MSP) buyback contract for dragon fruit and avocado cultivators.",
+      "atomic_claims": [
+        "NHB provides a 10-year MSP buyback contract for dragon fruit and avocado."
+      ],
+      "expected_verdict": "NEED MANUAL VERIFICATION",
+      "evidence_quote": "NEED MANUAL VERIFICATION",
+      "source_filename": "horticulture_ english (5).pdf",
+      "printed_page": "N/A",
+      "pdf_page_index": null,
+      "explanation": "NHB operational guidelines focus on credit-linked capital investment subsidies for PHM, production, cold storage, and market information services, but do not operate buyback contracts or MSP guarantees.",
+      "corrected_claim": null,
+      "verification_status": "VERIFIED"
+    },
+    {
+      "id": "BG-048",
+      "scheme": "NHB Schemes",
+      "language": "Hindi",
+      "difficulty": "Difficult Edge Case",
+      "category": "Direct Support",
+      "input_text": "राष्ट्रीय बागवानी बोर्ड प्रत्येक आवेदक किसान को कृषि ड्रोन खरीदने के लिए 5 लाख रुपये का पृथक नकद अनुदान प्रदान करता है।",
+      "atomic_claims": [
+        "NHB awards a separate Rs. 5 lakh cash grant for agricultural drone purchase to every farmer."
+      ],
+      "expected_verdict": "NEED MANUAL VERIFICATION",
+      "evidence_quote": "NEED MANUAL VERIFICATION",
+      "source_filename": "horticulture_hindi (5).pdf",
+      "printed_page": "N/A",
+      "pdf_page_index": null,
+      "explanation": "Agricultural drone purchase grants of Rs. 5 lakh are not included in the NHB operational guidelines document.",
+      "corrected_claim": null,
+      "verification_status": "VERIFIED"
+    },
+    {
+      "id": "BG-049",
+      "scheme": "NHB Schemes (Difficult: Numerical & Area Threshold Distortions)",
+      "language": "English",
+      "difficulty": "Difficult Edge Case",
+      "category": "Direct Contradiction / Distortion",
+      "input_text": "For commercial horticulture projects in general areas, NHB provides credit-linked subsidy @ 50% of cost limited to Rs. 1.00 crore for open cultivation starting from 1 hectare.",
+      "atomic_claims": [
+        "Subsidy in general area for commercial horticulture is 50% up to Rs. 1.00 crore.",
+        "Open cultivation minimum area threshold is 1 hectare."
+      ],
+      "expected_verdict": "BLOCKED",
+      "evidence_quote": "Credit linked back-ended subsidy @ 20% of the total project cost limited to Rs 25 lakh per project in general area\" and \"assistance shall be available for projects covering area above four hectares (above 10 acres) in case of open cultivation",
+      "source_filename": "horticulture_ english (5).pdf",
+      "printed_page": "Page 1 (Scheme 1 Pattern of Assistance & General Conditions)",
+      "pdf_page_index": 0,
+      "explanation": "Distorts both financial and land thresholds: subsidy rate in general areas is 20% up to Rs. 25 lakh (not 50% up to 1 crore), and minimum area for open cultivation is above 4 hectares (not 1 hectare).",
+      "corrected_claim": "Official source specification (horticulture_ english (5).pdf, Page 1 (Scheme 1 Pattern of Assistance & General Conditions)): Credit linked back-ended subsidy @ 20% of the total project cost limited to Rs 25 lakh per project in general area\" and \"assistance shall be available for projects covering area above four hectares (above 10 acres) in case of open cultivation",
+      "verification_status": "VERIFIED"
+    },
+    {
+      "id": "BG-050",
+      "scheme": "NHB Schemes (Difficult: Lock-in Period & UC Submission Error)",
+      "language": "Hindi",
+      "difficulty": "Difficult Edge Case",
+      "category": "Direct Contradiction / Distortion",
+      "input_text": "कोल्ड स्टोरेज परियोजना का बैंक सावधि ऋण (टर्म लोन) जारी होने के 1 वर्ष (12 महीने) बाद ही बैंक द्वारा एनएचबी को उपयोगिता प्रमाण पत्र (UC) प्रस्तुत किया जा सकता है।",
+      "atomic_claims": [
+        "Utilization Certificate can be submitted by Bank to NHB 12 months after Term Loan release."
+      ],
+      "expected_verdict": "BLOCKED",
+      "evidence_quote": "on adjustment subsidy amount as part of the last installment which should not be prior to 36 months period from the date of release of Term Loan, the Bank/FI shall submit to NHB Utilization Certificate",
+      "source_filename": "horticulture_ english (5).pdf` & `horticulture_hindi (5).pdf",
+      "printed_page": "Page 22 (Format VIII instructions)",
+      "pdf_page_index": 21,
+      "explanation": "The lock-in period before adjusting final subsidy and submitting the Utilization Certificate is explicitly mandated as not prior to 36 months (3 years) from term loan release, contradicting the 12-month claim.",
+      "corrected_claim": "Official source specification (horticulture_ english (5).pdf` & `horticulture_hindi (5).pdf, Page 22 (Format VIII instructions)): on adjustment subsidy amount as part of the last installment which should not be prior to 36 months period from the date of release of Term Loan, the Bank/FI shall submit to NHB Utilization Certificate",
+      "verification_status": "VERIFIED"
+    }
+  ],
+  "verified_bilingual_pairs": [
+    {
+      "pair_id": "BG-BIL-001",
+      "scheme": "ADIP Scheme (Ministry of Social Justice & Empowerment)",
+      "english_text": "Under the ADIP scheme, beneficiaries with a monthly income up to ₹22,500 receive 100% financial assistance for the cost of aids and appliances, while those earning between ₹22,501 and ₹30,000 receive a 50% subsidy.",
+      "hindi_text": "एडिप योजना के तहत, ₹22,500 प्रति माह तक की आय वाले लाभार्थियों को सहायक यंत्रों की पूरी (100%) लागत की वित्तीय सहायता मिलती है, जबकि ₹22,501 से ₹30,000 तक की आय वाले व्यक्तियों को 50% सब्सिडी मिलती है।",
+      "expected_result": "EQUIVALENT",
+      "discrepancy_description": null,
+      "evidence_quote": {
+        "english_quote": "7.01 The amount of assistance will be as follows:- i. Upto Rs. 22,500/- per month -> i. Full cost of aid/appliance; ii. Rs.22,501/- to Rs. 30,000/- per month -> ii. 50% of the cost of aid/appliance",
+        "hindi_quote": "7.01 (i) 22,500/- रुपये तक प्रति माह -> (i) योजना के तहत पूर्ण वित्तीय सहायता; (ii) 22,501/- से रु. 30000/- रुपये के बीच की लागत -> 15000/- रुपये तक वित्तीय सहायता / 50% की लागत"
+      },
+      "source_filename": {
+        "english_pdf": "ADIP_English (4).pdf",
+        "hindi_pdf": "ADIP_Hindi(4).pdf"
+      },
+      "page_reference": {
+        "english_page": "4 (Para 7.01)",
+        "hindi_page": "4 (Para 7.01)"
+      },
+      "explanation": "Both English and Hindi statements accurately reflect the official income slabs and subsidy percentages mandated by the Department of Empowerment of Persons with Disabilities. No semantic or numerical discrepancy exists.",
+      "verification_status": "VERIFIED"
+    },
+    {
+      "pair_id": "BG-BIL-002",
+      "scheme": "ADIP Scheme (Ministry of Social Justice & Empowerment)",
+      "english_text": "Motorized tricycles under ADIP are available to persons with severe locomotor disability having 80% and above disability, aged 16 years and above, with a maximum subsidy of ₹50,000 once in five years.",
+      "hindi_text": "एडिप योजना के तहत मोटरयुक्त ट्राइसाइकिल 50% से अधिक दिव्यांगता वाले 14 वर्ष और उससे अधिक आयु के व्यक्तियों को 5 वर्ष में एक बार ₹50,000 की अधिकतम सब्सिडी के साथ प्रदान की जाती है।",
+      "expected_result": "DISCREPANCY",
+      "discrepancy_description": "Numerical and conditional discrepancies:",
+      "evidence_quote": {
+        "english_quote": "Persons with Disabilities having 80% and above disability would be eligible for assistance for Motorized tricycle and Motorized wheelchair. Extent of subsidy would be Rs.50,000/-. This will be provided to persons aged 16 years and above, once in five years.",
+        "hindi_quote": "80% और उससे अधिक दिव्यांगता वाले दिव्यांग व्यक्ति मोटरयुक्त ट्राइसाइकिल और मोटरयुक्त व्हीलचेयर के लिए सहायता के पात्र होंगे। अधिकतम सब्सिडी 50,000/- रुपये होगी। यह 16 वर्ष और उससे अधिक आयु के व्यक्तियों को पांच वर्ष में एक बार प्रदान किया जाएगा।"
+      },
+      "source_filename": {
+        "english_pdf": "ADIP_English (4).pdf",
+        "hindi_pdf": "ADIP_Hindi(4).pdf"
+      },
+      "page_reference": {
+        "english_page": "5 (Para 8.01(g)(3))",
+        "hindi_page": "5 (Para 8.01(ग)(3))"
+      },
+      "explanation": "The Hindi statement contains injected factual inaccuracies regarding both the benchmark disability threshold (lowered from 80% to 50%) and the minimum age requirement (reduced from 16 to 14 years). BhashaGuard must flag this as a critical audit discrepancy.",
+      "verification_status": "VERIFIED"
+    },
+    {
+      "pair_id": "BG-BIL-003",
+      "scheme": "PMFME Scheme (Ministry of Food Processing Industries)",
+      "english_text": "Under PMFME, seed capital of ₹40,000 per member is provided to SHG federations for working capital and purchase of small tools for members engaged in food processing.",
+      "hindi_text": "पीएम एफएमई योजना के तहत खाद्य प्रसंस्करण में लगे स्व-सहायता समूह (SHG) के प्रत्येक सदस्य को वर्किंग कैपिटल और छोटे औजारों की खरीद के लिए ₹40,000 की दर से प्रारंभिक पूंजी (Seed Capital) प्रदान की जाती है।",
+      "expected_result": "EQUIVALENT",
+      "discrepancy_description": null,
+      "evidence_quote": {
+        "english_quote": "5.3.2 Seed capital: 1. Seed capital @ Rs40,000/- per member of SHG for working capital and purchase of small tools would be provided under the scheme;",
+        "hindi_quote": "5.3.2 प्रारंभिक पूंजी: 1. योजना के अंतर्गत वर्किंग कैपिटल तथा छोटे औजारों की खरीद के लिए एसएचजी के प्रत्येक सदस्य को 40,000/- रुपये की दर से प्रारंभिक पूंजी उपलब्ध कराई जाएगी;"
+      },
+      "source_filename": {
+        "english_pdf": "PMFME English (2).pdf",
+        "hindi_pdf": "PM FME HINDI (2).pdf"
+      },
+      "page_reference": {
+        "english_page": "11 (Para 5.3.2(1))",
+        "hindi_page": "9 (Para 5.3.2(1))"
+      },
+      "explanation": "Both English and Hindi statements faithfully represent the scheme guidelines regarding seed capital allocation for SHG members in food processing.",
+      "verification_status": "VERIFIED"
+    },
+    {
+      "pair_id": "BG-BIL-004",
+      "scheme": "PMFME Scheme (Ministry of Food Processing Industries)",
+      "english_text": "Individual micro food processing units are eligible for a credit-linked capital subsidy at 35% of the project cost, subject to a maximum ceiling of ₹10.0 lakh per unit, with a minimum beneficiary contribution of 10%.",
+      "hindi_text": "व्यक्तिगत सूक्ष्म खाद्य प्रसंस्करण इकाइयों को परियोजना लागत की 50% की दर से क्रेडिट-लिंक्ड पूंजी सब्सिडी दी जाएगी, जिसकी अधिकतम सीमा ₹15.0 लाख प्रति इकाई होगी और लाभार्थी का न्यूनतम योगदान 5% होगा।",
+      "expected_result": "DISCREPANCY",
+      "discrepancy_description": "Three distinct numerical discrepancies:",
+      "evidence_quote": {
+        "english_quote": "4.1 Individual micro food processing units would be provided credit-linked capital subsidy @35% of the eligible project cost with a maximum ceiling of Rs.10.0 lakh per unit. The beneficiary contribution should be minimum 10% and the balance should be loan from bank.",
+        "hindi_quote": "4.1 निजी सूक्ष्म खाद्य प्रसंस्करण उद्योगों को प्रति उद्योग पात्र परियोजना लागत की 35% की दर से क्रेडिट-लिंक्ड पूंजी सब्सिडी परंतु अधिकतम 10.0 लाख रुपये दिए जाएंगे। लाभार्थी का योगदान न्यूनतम 10% होना चाहिए और शेष राशि बैंक से ऋण होनी चाहिए।"
+      },
+      "source_filename": {
+        "english_pdf": "PMFME English (2).pdf",
+        "hindi_pdf": "PM FME HINDI (2).pdf"
+      },
+      "page_reference": {
+        "english_page": "8 (Para 4.1)",
+        "hindi_page": "6 (Para 4.1)"
+      },
+      "explanation": "The Hindi claim contains altered figures across all financial parameters of individual unit funding under PMFME, representing a major audit conflict.",
+      "verification_status": "VERIFIED"
+    },
+    {
+      "pair_id": "BG-BIL-005",
+      "scheme": "PMAY-U 2.0 (Ministry of Housing and Urban Affairs)",
+      "english_text": "Economically Weaker Section (EWS) households under PMAY-U 2.0 are defined as having an annual household income up to ₹3.0 lakh, and eligible dwelling units have a carpet area between 30 sqm and 45 sqm.",
+      "hindi_text": "पीएमएवाई-यू 2.0 के तहत आर्थिक रूप से कमजोर वर्ग (EWS) के परिवारों की वार्षिक आय ₹3.0 लाख तक निर्धारित है, और पात्र आवास इकाइयों का कालीन क्षेत्रफल (Carpet Area) न्यूनतम 30 वर्ग मीटर से अधिकतम 45 वर्ग मीटर तक होता है।",
+      "expected_result": "EQUIVALENT",
+      "discrepancy_description": null,
+      "evidence_quote": {
+        "english_quote": "Economically Weaker Section (EWS): Households having an annual income up to ₹3.0 lakh... EWS House: An all-weather single dwelling unit or a unit in a multi-storied super structure having carpet area of minimum 30 sqm and maximum up to 45 sqm",
+        "hindi_quote": "आर्थिक रूप से कमजोर वर्ग (EWS): 3-0 लाख रुपये तक की वार्षिक आय वाले परिवार।... EWS आवास: न्यूनतम 30 वर्ग मीटर और अधिकतम 45 वर्ग मीटर तक के कारपेट एरिया में शौचालय, पानी, बिजली आदि पर्याप्त बुनियादी नागरिक सुविधाओं..."
+      },
+      "source_filename": {
+        "english_pdf": "PMAY-English (1).pdf",
+        "hindi_pdf": "PMAY-U-2-Hindi (1).pdf"
+      },
+      "page_reference": {
+        "english_page": "3 (Definitions) & **Page:** 4 (Para 3.3)",
+        "hindi_page": "2 (Definitions)"
+      },
+      "explanation": "The claims match perfectly in both languages and reflect the official parameters set forth in the PMAY-U 2.0 guidelines.",
+      "verification_status": "VERIFIED"
+    },
+    {
+      "pair_id": "BG-BIL-006",
+      "scheme": "PMAY-U 2.0 (Ministry of Housing and Urban Affairs)",
+      "english_text": "Under the Interest Subsidy Scheme (ISS) vertical of PMAY-U 2.0, eligible beneficiaries with income up to ₹9 lakh can avail an interest subsidy on home loans up to ₹25 lakh for property values up to ₹35 lakh, with a maximum subsidy release of ₹1.80 lakh.",
+      "hindi_text": "पीएमएवाई-यू 2.0 के ब्याज सब्सिडी योजना (ISS) घटक के तहत ₹12 लाख तक की आय वाले लाभार्थी ₹40 लाख तक के आवास मूल्य के लिए ₹30 लाख तक के गृह ऋण पर ₹2.50 लाख की अधिकतम ब्याज सब्सिडी प्राप्त कर सकते हैं।",
+      "expected_result": "DISCREPANCY",
+      "discrepancy_description": "Four distinct numerical discrepancies:",
+      "evidence_quote": {
+        "english_quote": "5.4.3 A maximum release of interest subsidy of ₹1.80 lakh having maximum NPV of ₹1.50 lakh... Households having income up to ₹9 lakh, loan value up to ₹25 lakh for property value up to ₹35 lakh would be eligible for a subsidy",
+        "hindi_quote": "ब्याज सब्सिडी का अधिकतम लाभ (वास्तविक रिलीज): 1.80 लाख रुपये... वार्षिक पारिवारिक आय: 9 लाख रुपये तक, अधिकतम पात्र आवास ऋण: 25 लाख रुपये, अधिकतम गृह मूल्य: 35 लाख रुपये"
+      },
+      "source_filename": {
+        "english_pdf": "PMAY-English (1).pdf",
+        "hindi_pdf": "PMAY-U-2-Hindi (1).pdf"
+      },
+      "page_reference": {
+        "english_page": "23 (Para 5.4.3)",
+        "hindi_page": "23 (Para 5.4.3 & Table)"
+      },
+      "explanation": "The Hindi text contains wholesale fabrication of monetary thresholds across income, loan, property, and subsidy categories, making it a critical audit failure.",
+      "verification_status": "VERIFIED"
+    },
+    {
+      "pair_id": "BG-BIL-007",
+      "scheme": "SEED Scheme (Development and Welfare Board for DNTs)",
+      "english_text": "While the general family income ceiling for the SEED scheme is ₹2.50 lakh or less per annum, the specific income threshold for the Free Coaching component for DNT students is raised to ₹8.0 lakh or less per annum.",
+      "hindi_text": "यद्यपि सीड (SEED) योजना का सामान्य पारिवारिक आय मानदंड ₹2.50 लाख या उससे कम प्रति वर्ष है, लेकिन डीएनटी छात्रों के लिए मुफ्त कोचिंग (Free Coaching) घटक की विशेष आय सीमा ₹8.0 लाख प्रति वर्ष या उससे कम रखी गई है।",
+      "expected_result": "EQUIVALENT",
+      "discrepancy_description": null,
+      "evidence_quote": {
+        "english_quote": "3. Target Group... DNT Communities having total family income from all sources of Rs.2.50 lakh or less per annum... 4.2.4 Eligibility criteria for students: 1. Only students belonging to DNT communities having total family income from all sources of Rs 8 lakhs or less per annum... will be eligible",
+        "hindi_quote": "3. लक्षित समूह... कुल पारिवारिक आय 2.50 लाख रुपये या उससे कम प्रति वर्ष... 4.2.4 (1) केवल 8 लाख रुपये या उससे कम प्रति वर्ष की कुल पारिवारिक आय वाले डीएनटी समुदायों के छात्र योजना के तहत लाभ के लिए पात्र होंगे।"
+      },
+      "source_filename": {
+        "english_pdf": "SEED English (3).pdf",
+        "hindi_pdf": "SEED Hindi (3).pdf"
+      },
+      "page_reference": {
+        "english_page": "3 (Para 3) & **Page:** 4 (Para 4.2.4(1))",
+        "hindi_page": "3 (Para 3) & **Page:** 4 (Para 4.2.4(1))"
+      },
+      "explanation": "Both English and Hindi statements accurately highlight the specific component-wise income relaxation granted for free coaching under SEED.",
+      "verification_status": "VERIFIED"
+    },
+    {
+      "pair_id": "BG-BIL-008",
+      "scheme": "SEED Scheme (Development and Welfare Board for DNTs)",
+      "english_text": "Under Pillar 2 of SEED, eligible DNT/NT/SNT families are provided health insurance coverage of ₹5.0 lakh per family per year through PMJAY Ayushman Bharat.",
+      "hindi_text": "सीड योजना के द्वितीय स्तंभ के अंतर्गत पात्र डीएनटी/एनटी/एसएनटी परिवारों को प्रति परिवार प्रति वर्ष ₹10.0 लाख का स्वास्थ्य बीमा कवर प्रदान किया जाता है।",
+      "expected_result": "DISCREPANCY",
+      "discrepancy_description": "Numerical discrepancy: English states **₹5.0 lakh per family per year**, Hindi states **₹10.0 lakh per family per year**.",
+      "evidence_quote": {
+        "english_quote": "5.1 Objectives of Supporting Health Care for DNT, NT and SNT:... providing a health cover of Rs. 5 lakhs per family per year to DNT, NT and SNT families as per norms of Ayushman Bharat PradhanMantri Jan ArogyaYojana.",
+        "hindi_quote": "5.1 डीएनटी, एनटी और एसएनटी के लिए स्वास्थ्य देखभाल सहायता का प्राथमिक उद्देश्य... 'आयुष्मान भारत प्रधानमंत्री जन आरोग्य योजना' के मानदंडों के अनुसार डीएनटी, एनटी और एसएनटी परिवारों को प्रति परिवार प्रति वर्ष 5 लाख रुपये का स्वास्थ्य कवर प्रदान करना है।"
+      },
+      "source_filename": {
+        "english_pdf": "SEED English (3).pdf",
+        "hindi_pdf": "SEED Hindi (3).pdf"
+      },
+      "page_reference": {
+        "english_page": "10 (Para 5.1)",
+        "hindi_page": "10 (Para 5.1)"
+      },
+      "explanation": "The Hindi claim doubles the health cover ceiling from ₹5 lakh to ₹10 lakh, creating an irreconcilable discrepancy with the official PM-JAY alignment under SEED.",
+      "verification_status": "VERIFIED"
+    },
+    {
+      "pair_id": "BG-BIL-009",
+      "scheme": "NHB Scheme 1 (Development of Commercial Horticulture)",
+      "english_text": "Under NHB Scheme 1 for Commercial Horticulture Development, financial assistance is available for open field cultivation projects covering an area above 4.0 hectares (10 acres) and for protected cultivation projects exceeding 1,000 sq. meters.",
+      "hindi_text": "राष्ट्रीय बागवानी बोर्ड (NHB) की योजना 1 के तहत, वाणिज्यिक बागवानी विकास हेतु खुले खेत की खेती की परियोजनाओं के लिए 4.0 हेक्टेयर (10 एकड़) से अधिक और संरक्षित खेती (Protected Cultivation) के लिए 1,000 वर्ग मीटर से अधिक का क्षेत्रफल अनिवार्य है।",
+      "expected_result": "EQUIVALENT",
+      "discrepancy_description": null,
+      "evidence_quote": {
+        "english_quote": "General conditions: 1. The above assistance shall be available for projects covering area above four hectares (above 10 acres) in case of open cultivation, and more than 1000 sq. meter in case of protected cultivation.",
+        "hindi_quote": "शीत संग्रहगार परियोजनाओं के लिए सामान्य शर्तें: 1. उपर्युक्त सहायता खुले खेत की खेती के मामले में चार हेक्टेयर (10 एकड़ से अधिक) से अधिक तथा संरक्षित खेती के मामले में 1000 वर्ग मीटर से अधिक क्षेत्रफल को कवर करने वाली परियोजनाओं के लिए उपलब्ध होगी।"
+      },
+      "source_filename": {
+        "english_pdf": "horticulture_ english (5).pdf",
+        "hindi_pdf": "horticulture_hindi (5).pdf"
+      },
+      "page_reference": {
+        "english_page": "3 (General Condition 1)",
+        "hindi_page": "3 (सामान्य शर्तें 1)"
+      },
+      "explanation": "Both English and Hindi statements faithfully state the minimum area eligibility criteria for open field and protected commercial horticulture projects.",
+      "verification_status": "VERIFIED"
+    },
+    {
+      "pair_id": "BG-BIL-010",
+      "scheme": "NHB Scheme 2 (Capital Investment Subsidy for Cold Storage)",
+      "english_text": "Capital Investment Subsidy Scheme for Cold Storage (NHB Scheme 2) provides credit-linked back-ended subsidy at 40% of the project cost in general areas and 55% in Hilly/Scheduled areas for a maximum storage capacity of 5,000 MT per project.",
+      "hindi_text": "एनएचबी शीत संग्रहण योजना के तहत सामान्य क्षेत्रों में 25% और पहाड़ी क्षेत्रों में 33% की दर से क्रेडिट-लिंक्ड सब्सिडी दी जाती है, जिसकी अधिकतम भंडारण क्षमता 10,000 एमटी प्रति प्रोजेक्ट निर्धारित है।",
+      "expected_result": "DISCREPANCY",
+      "discrepancy_description": "Multiple numerical discrepancies:",
+      "evidence_quote": {
+        "english_quote": "Pattern of Assistance: - The assistance will be as credit linked back-ended subsidy @ 40% of the capital cost of project in general areas and 55% in case of Hilly & Scheduled Areas for a maximum storage capacity of 5000 MT per project",
+        "hindi_quote": "सहायता का तरीका % सामान्य क्षेत्रों में साख निर्धारित बैक-एंडेड आर्थिक सहायता परियोजना की पूंजी लागत का 40 प्रतिशत की दर से तथा पहाड़ी तथा जनजातीय क्षेत्रों के मामलों में... अधिकतम संग्रह क्षमता 5000 एएमटी प्रति परियोजना के लिए 55 प्रतिशत सहायता होगी।"
+      },
+      "source_filename": {
+        "english_pdf": "horticulture_ english (5).pdf",
+        "hindi_pdf": "horticulture_hindi (5).pdf"
+      },
+      "page_reference": {
+        "english_page": "7 (Scheme 2 Pattern of Assistance)",
+        "hindi_page": "7 (Scheme 2 सहायता का तरीका)"
+      },
+      "explanation": "The Hindi input misquotes both subsidy rates (reducing 40%/55% to 25%/33%) and doubles the maximum storage capacity from 5,000 MT to 10,000 MT. This constitutes an absolute audit discrepancy.",
+      "verification_status": "VERIFIED"
+    }
+  ],
+  "unverified_cases": []
+}

@@ -1,0 +1,18 @@
+{
+  "target_cases": 50,
+  "per_scheme_target": 10,
+  "schemes": ["ADIP", "PMFME", "PMAY-U 2.0", "SEED", "National Horticulture Board schemes"],
+  "planned_verdict_cases": {
+    "ACCEPTED": 15,
+    "BLOCKED": 15,
+    "NEEDS REVIEW": 10
+  },
+  "additional_challenge_cases": 10,
+  "challenge_case_note": "The ten difficult numerical, logical, and conditional cases are part of the fifty-case target. Assign each one of the three verdicts only after checking its source evidence; the challenge quota is not a fourth verdict.",
+  "split_plan": {
+    "dev": 30,
+    "final": 20,
+    "scheme_split": "Target six development and four held-out cases per scheme, using distinct underlying facts across splits."
+  },
+  "status": "planning-only-no-source-pdfs-or-cases-verified"
+}

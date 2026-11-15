@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "BhashaGuard manually reviewed bilingual consistency case",
+  "type": "object",
+  "required": ["test_id", "english_answer", "hindi_answer", "expected_discrepancy", "category"],
+  "properties": {
+    "test_id": {"type": "string", "minLength": 1},
+    "english_answer": {"type": "string", "minLength": 1},
+    "hindi_answer": {"type": "string", "minLength": 1},
+    "expected_discrepancy": {"type": "boolean"},
+    "category": {"enum": ["equivalent", "number", "eligibility", "exception", "negation", "date", "percentage", "other"]},
+    "expected_notes": {"type": "string"},
+    "source_pdf": {"type": "string"},
+    "page": {"type": ["integer", "null"], "minimum": 1},
+    "evidence": {"type": "string"}
+  },
+  "additionalProperties": true
+}

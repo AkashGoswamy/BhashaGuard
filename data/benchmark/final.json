@@ -1,0 +1,11 @@
+{
+  "metadata": {
+    "dataset": "bhashaguard-claims",
+    "split": "final",
+    "status": "empty-template",
+    "held_out": true,
+    "manual_review_required": true,
+    "case_count": 0
+  },
+  "cases": []
+}
