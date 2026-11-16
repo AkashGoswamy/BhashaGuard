@@ -100,13 +100,13 @@ Two label sets are reported and never conflated:
 - **Verdict:** `ACCEPTED`, `BLOCKED`, `NEEDS REVIEW`.
 - **Evidence strength:** `STRONG`, `MODERATE`, `INSUFFICIENT`. This is a label produced by the model under instruction, not a calibrated probability.
 
-A `NEEDS REVIEW` result never carries a suggested correction. A correction is shown only when the evidence directly supports one.
+A `NEEDS REVIEW` result never carries a suggested correction. For other verdicts, the model is instructed to suggest a correction only when the supplied evidence directly supports it; the app does not independently verify the correction text.
 
 ### How evidence is retrieved
 
 **Local PDFs** ([`core/retrieval.py`](core/retrieval.py)). PDFs under `data/documents/` are read with PyMuPDF, split into overlapping 1,050-character chunks (850-character stride), tagged Hindi or English by Devanagari detection, and cached in `data/index/pdf_index.json`. Ranking is a small BM25-style scorer with three boosts: an exact-phrase match, a per-number match, and a 1.08× multiplier for chunks in the claim's language. It does not use embeddings and does not download a model. Indexing is **always explicit**, never a side effect of an audit or a benchmark run. The index is invalidated when a PDF's path, size or modification time changes.
 
-**Web** ([`core/web_search.py`](core/web_search.py)). One Tavily `advanced` search per claim (top 5 results), then each result page is fetched and reduced to passages that overlap the claim's terms. A page passage is rejected if the claim contains a number that the passage does not. If the page cannot be retrieved, the Tavily snippet is used but tagged `search result only`, and the UI flags it as not conclusive.
+**Web** ([`core/web_search.py`](core/web_search.py)). One Tavily `advanced` search per claim (top 5 results), then each result page is fetched and reduced to passages that overlap the claim's terms. When a claim contains digit-bearing tokens, a passage must contain at least one of those tokens to pass the numeric filter; this does not check that every number in the claim appears in the passage. If the page cannot be retrieved, a relevant Tavily snippet may be used but is tagged `search result only`, and the UI flags it as not conclusive.
 
 ### English–Hindi consistency
 
@@ -133,9 +133,9 @@ Comparison and verification are independent. The comparison prompt explicitly sa
 | Retrieval | Hand-written BM25-style lexical ranker | Local passage ranking with phrase, number and language boosts |
 | Testing | `unittest` | 12 offline tests for metrics, splits, retrieval and usage tracking |
 
-**Models.** BhashaGuard asks Groq which models the supplied key can use and picks the first available from this preference list ([`core/llm.py`](core/llm.py)): `openai/gpt-oss-120b`, `qwen/qwen3.8-27b`, `openai/gpt-oss-20b`, `llama-3.3-70b-versatile`. If none is available it falls back to the alphabetically first chat-capable model. Calls use `temperature=0`. The model ID used is recorded in every saved benchmark run. No model is trained or fine-tuned; BhashaGuard orchestrates existing models.
+**Models.** BhashaGuard requests the models available to the supplied key from Groq and picks the first available ID from this preference list ([`core/llm.py`](core/llm.py)): `openai/gpt-oss-120b`, `qwen/qwen3.8-27b`, `openai/gpt-oss-20b`, `llama-3.3-70b-versatile`. Groq has deprecated `llama-3.3-70b-versatile` for free and developer tiers, so it will be skipped when the key's model list does not include it ([Groq deprecation notes](https://console.groq.com/docs/deprecations)). If no preferred ID is available, the code falls back to the alphabetically first listed model whose ID does not contain several known non-chat terms. This is a name-based heuristic; compatibility is confirmed only when a chat-completion request succeeds. Calls use `temperature=0`. Each benchmark run records the application's current model ID; if a run fails before model selection completes, that value may not identify a model that successfully completed a request. No model is trained or fine-tuned; BhashaGuard orchestrates existing models.
 
-Dependencies are in [`requirements.txt`](requirements.txt): `streamlit>=1.38,<2`, `requests>=2.32,<3`, `PyMuPDF>=1.24,<2`. The application and the test suite were verified here with Streamlit 1.67.0 and PyMuPDF 1.28.2.
+Dependencies are listed in [`requirements.txt`](requirements.txt): `streamlit>=1.38,<2`, `requests>=2.32,<3`, `PyMuPDF>=1.24,<2`. **Compatibility note:** the app uses Streamlit `width="stretch"` arguments, supported by Streamlit 1.49 and later. The current requirements range permits older versions, so the install commands below explicitly require `streamlit>=1.49`. The application and offline test suite were verified here with Streamlit 1.67.0 and PyMuPDF 1.28.2.
 
 ## Quick start
 
@@ -150,12 +150,12 @@ Dependencies are in [`requirements.txt`](requirements.txt): `streamlit>=1.38,<2`
 **Windows (PowerShell)**
 
 ```powershell
-git clone https://github.com/<your-username>/BhashaGuard.git
+git clone https://github.com/AkashGoswamy/BhashaGuard.git
 cd BhashaGuard
 py -3.11 -m venv .venv
 .\.venv\Scripts\Activate.ps1
 python -m pip install --upgrade pip
-pip install -r requirements.txt
+pip install "streamlit>=1.49" -r requirements.txt
 streamlit run app.py
 ```
 
@@ -164,22 +164,22 @@ If PowerShell blocks activation, run `Set-ExecutionPolicy -Scope Process -Execut
 **macOS / Linux**
 
 ```bash
-git clone https://github.com/<your-username>/BhashaGuard.git
+git clone https://github.com/AkashGoswamy/BhashaGuard.git
 cd BhashaGuard
 python3.11 -m venv .venv
 source .venv/bin/activate
 pip install --upgrade pip
-pip install -r requirements.txt
+pip install "streamlit>=1.49" -r requirements.txt
 streamlit run app.py
 ```
 
 Then open the URL Streamlit prints, paste your keys into the **sidebar**, and press **Validate keys**.
 
-> **No `.env` file is needed.** Keys are typed into the sidebar, live only in Streamlit's session state, and are never written to disk. **Clear keys and session** wipes them. Error messages from the Groq client redact the key.
+> **No `.env` file is needed.** In the app, keys are entered in the sidebar and held in Streamlit session state for that session; the CLI requests them with hidden input. Keys are sent to Groq or Tavily when needed for authentication, but are not written to project files or benchmark results. The model-selection cache stores a SHA-256 fingerprint rather than the raw key. **Clear keys and session** clears the app session and model cache. Groq error messages redact the key.
 
 ### Add the local evidence library (optional)
 
-Put PDFs in `data/documents/` (subfolders are scanned). Then open **PDF library → Refresh PDF index**. The PDFs themselves are git-ignored (`data/documents/*.pdf`), so a fresh clone starts with an empty library. Scanned PDFs with no extractable text are reported as needing OCR; BhashaGuard does not perform OCR.
+Put PDFs in `data/documents/` (subfolders are scanned). Then open **PDF library → Refresh PDF index**. The current `.gitignore` pattern (`data/documents/*.pdf`) ignores PDFs directly inside `data/documents/`, but does not cover PDFs in nested subfolders. The app scans subfolders, so check `git status` and ensure nested PDFs are ignored before committing them. A fresh clone has no local evidence library unless PDFs are committed or added separately. Scanned PDFs with no extractable text are reported as needing OCR; BhashaGuard does not perform OCR.
 
 ### Run the tests
 
@@ -311,7 +311,7 @@ Design choices that keep the numbers honest:
 | BG-006 | BLOCKED | BLOCKED | ✓ |
 | BG-007 | NEEDS REVIEW | NEEDS REVIEW | ✓ |
 
-What the failures taught us: weak or irrelevant retrieval pushed three cases into abstention, and in BG-002 a **Hindi scheme-name confusion** retrieved irrelevant evidence and produced a false block. The 0/2 false-acceptance figure is encouraging but rests on two cases.
+Two of the three `NEEDS REVIEW` predictions (BG-001 and BG-004) were incorrect against the provisional labels; BG-007 was the expected `NEEDS REVIEW` result. BG-002 was falsely blocked after the Hindi scheme name was rendered as “IDP,” leading to confusion with unrelated IDP material. The 0/2 false-acceptance figure is encouraging but rests on two `BLOCKED` cases.
 
 **Bilingual consistency (5 of 5 pairs completed)**
 
@@ -343,7 +343,7 @@ BhashaGuard/
 ├── data/
 │   ├── json/                   # Supplied candidate datasets (read-only)
 │   ├── benchmark/              # Schemas, plan, empty manual-review templates; results/ is git-ignored
-│   ├── documents/              # Put evidence PDFs here (PDFs are git-ignored)
+│   ├── documents/              # Evidence PDFs; current ignore rule covers only top-level PDFs
 │   └── index/                  # Generated PDF index cache (git-ignored)
 ├── tests/test_evaluation.py    # 12 offline unit tests
 ├── .streamlit/config.toml      # Light theme
@@ -355,10 +355,10 @@ BhashaGuard/
 - **A pipeline instead of one prompt.** Extraction, retrieval, verification, comparison and evaluation are separate modules, so each can be tested, measured and improved independently. Retrieval failures and reasoning failures show up as different things in the benchmark.
 - **Guardrails in code, not only in prompts.** Prompts ask the model to abstain; `verification.py` also enforces it. A model verdict without a trusted source is downgraded, and an unreadable or failed model response becomes `NEEDS REVIEW`.
 - **Search snippets are second-class evidence.** Snippets are kept, labelled and shown, but they cannot make a decisive verdict alone.
-- **Numbers are checked mechanically.** Web passages that omit a number present in the claim are discarded, and local ranking boosts numeric matches. This targets the most common failure in scheme data: a right sentence with the wrong figure.
+- **Numbers receive a mechanical relevance check.** A web passage must contain at least one digit-bearing token from the claim to pass the numeric filter; it can still omit other claim numbers. Local ranking boosts matching numbers. This helps surface numerical evidence but does not prove every figure is correct.
 - **Lexical retrieval on purpose.** A small BM25-style ranker keeps the app light and easy to inspect, with no embedding model to download. The trade-off is weaker semantic matching, which matters most for Hindi paraphrases and scheme names.
 - **Evaluation as a feature.** Provisional and verified modes, grouped splits, failed-as-incorrect scoring and held-out warnings exist to stop the benchmark from flattering the system.
-- **Stateless secrets.** Keys live only in Streamlit session state and are never persisted or logged.
+- **Session-based secrets.** App keys are held in Streamlit session state and CLI keys are read with hidden input. Credentials are sent to the relevant provider for authentication, are not written to project or result files, and Groq error messages redact them. The process-local model cache stores only a SHA-256 fingerprint of the key.
 
 ## Limitations and roadmap
 
@@ -369,7 +369,7 @@ BhashaGuard/
 - **Local PDF path not yet benchmarked.** The latest factual run used web evidence only.
 - **Weak spots seen in testing:** Hindi scheme-name retrieval, snippet-only evidence, failed page fetches (JavaScript-only or access-restricted pages), and a false positive in bilingual comparison.
 - **Latency.** Claims are processed sequentially, and each costs one search, up to five page fetches and one model call. The latest factual run averaged 44.4 s per case.
-- **Source trust is domain-based.** Only `.gov`, `.gov.in`, `.nic.in`, `.edu` and `.ac.in` hosts and local PDFs count as trusted. The guardrail checks that a trusted source is present among the evidence, not that this source is the one supporting the verdict; the model's reading of the evidence still matters.
+- **Source trust is domain-based.** Hosts ending in `.gov`, `.gov.in`, `.nic.in`, `.edu` and `.ac.in`, plus the bare `gov.in` and `nic.in` hosts and local PDFs, count as trusted. The guardrail checks that a trusted source is present among the evidence, not that this source is the one supporting the verdict; the model's reading of the evidence still matters.
 - **LLM judgement is not deterministic proof.** Calls use `temperature=0`, but different available models can behave differently, and repeated-run consistency has not been measured.
 - **External dependencies.** Groq and Tavily availability, quotas and rate limits apply. Only one Tavily query is made per claim.
 - **Narrow scope.** Selected government schemes, English and Hindi. No OCR for scanned PDFs. No bias auditing. High-impact claims still need an authoritative or human check.
